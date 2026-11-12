@@ -1,0 +1,261 @@
+import {
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
+import { SpacedRepetitionAlgorithm } from '@prisma/client';
+import { PrismaService } from '../../database/prisma/prisma.service';
+import { RewardsService } from '../rewards/rewards.service';
+import { CompleteRevisionDto, CreateRevisionDto } from './dto/revision.dto';
+
+export interface SpacedRepetitionResult {
+  nextIntervalDays: number;
+  newEasinessFactor: number;
+  newRepetitionNumber: number;
+  nextRevisionDate: Date;
+}
+
+@Injectable()
+export class RevisionsService {
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly rewardsService: RewardsService,
+  ) {}
+
+  /**
+   * Configurable Spaced-Repetition Strategy Engine.
+   * Supports SM2, LEITNER, FSRS_LIGHT, and CUSTOM_INTERVALS without hardcoding a single algorithm.
+   */
+  public computeNextSchedule(params: {
+    algorithm: SpacedRepetitionAlgorithm;
+    repetitionNumber: number;
+    easinessFactor: number;
+    previousIntervalDays: number;
+    difficultyRating: number; // 1 (easiest) to 5 (hardest)
+    customIntervals?: number[];
+    now?: Date;
+  }): SpacedRepetitionResult {
+    const now = params.now ? new Date(params.now) : new Date();
+    // Convert difficultyRating (1=easiest .. 5=hardest) to recall quality q (5=perfect .. 1=forgot)
+    const quality = 6 - Math.min(5, Math.max(1, params.difficultyRating));
+    let ef = Number(params.easinessFactor) || 2.5;
+    let rep = params.repetitionNumber;
+    let interval = params.previousIntervalDays;
+
+    switch (params.algorithm) {
+      case 'LEITNER': {
+        const leitnerBoxes = [1, 2, 4, 7, 14, 30, 60];
+        if (quality < 3) {
+          rep = 0;
+          interval = leitnerBoxes[0];
+        } else {
+          rep = Math.min(leitnerBoxes.length - 1, rep + 1);
+          interval = leitnerBoxes[rep];
+        }
+        break;
+      }
+      case 'FSRS_LIGHT': {
+        // Stability-inspired multiplier adjusted by recall quality
+        if (quality < 3) {
+          rep = 0;
+          interval = 1;
+          ef = Math.max(1.3, ef - 0.25);
+        } else {
+          rep += 1;
+          const stabilityMultiplier = 1.8 + (quality - 3) * 0.45;
+          interval = rep === 1 ? 2 : Math.max(2, Math.round(interval * stabilityMultiplier));
+          ef = Math.min(3.2, ef + (quality - 3) * 0.1);
+        }
+        break;
+      }
+      case 'CUSTOM_INTERVALS': {
+        const custom =
+          Array.isArray(params.customIntervals) && params.customIntervals.length > 0
+            ? params.customIntervals
+            : [1, 3, 7, 14, 30];
+        if (quality < 3) {
+          rep = 0;
+          interval = custom[0];
+        } else {
+          const idx = Math.min(custom.length - 1, rep);
+          interval = custom[idx];
+          rep += 1;
+        }
+        break;
+      }
+      case 'SM2':
+      default: {
+        // SuperMemo SM-2 algorithm
+        if (quality < 3) {
+          rep = 0;
+          interval = 1;
+        } else {
+          if (rep === 0) {
+            interval = 1;
+          } else if (rep === 1) {
+            interval = 6;
+          } else {
+            interval = Math.round(interval * ef);
+          }
+          rep += 1;
+        }
+        ef = ef + (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02));
+        if (ef < 1.3) ef = 1.3;
+        break;
+      }
+    }
+
+    const nextDate = new Date(now.getTime() + interval * 86400 * 1000);
+    return {
+      nextIntervalDays: interval,
+      newEasinessFactor: Math.round(ef * 100) / 100,
+      newRepetitionNumber: rep,
+      nextRevisionDate: nextDate,
+    };
+  }
+
+  async listRevisions(userId: string) {
+    return this.prisma.revisionSchedule.findMany({
+      where: { userId },
+      include: {
+        revisionTopic: { include: { topic: { include: { chapter: true } } } },
+        history: { orderBy: { recordedAt: 'desc' }, take: 5 },
+      },
+      orderBy: { scheduledFor: 'asc' },
+    });
+  }
+
+  async listUpcomingRevisions(userId: string) {
+    return this.prisma.revisionSchedule.findMany({
+      where: {
+        userId,
+        status: 'PENDING',
+      },
+      include: {
+        revisionTopic: { include: { topic: true } },
+      },
+      orderBy: { scheduledFor: 'asc' },
+    });
+  }
+
+  async createRevision(userId: string, dto: CreateRevisionDto) {
+    const userSettings = await this.prisma.userSetting.findUnique({ where: { userId } });
+    const algorithm =
+      dto.algorithm || userSettings?.spacedRepetitionAlgorithm || SpacedRepetitionAlgorithm.SM2;
+
+    const revTopic = await this.prisma.revisionTopic.upsert({
+      where: { userId_topicId: { userId, topicId: dto.topicId } },
+      update: {},
+      create: {
+        userId,
+        topicId: dto.topicId,
+        masteryLevel: 1,
+      },
+    });
+
+    return this.prisma.revisionSchedule.create({
+      data: {
+        userId,
+        revisionTopicId: revTopic.id,
+        algorithm,
+        scheduledFor: dto.scheduledFor ? new Date(dto.scheduledFor) : new Date(),
+      },
+      include: { revisionTopic: { include: { topic: true } } },
+    });
+  }
+
+  async completeRevision(userId: string, scheduleId: string, dto: CompleteRevisionDto) {
+    const schedule = await this.prisma.revisionSchedule.findUnique({
+      where: { id: scheduleId },
+      include: { revisionTopic: true },
+    });
+    if (!schedule) {
+      throw new NotFoundException({
+        message: 'Revision schedule not found',
+        code: 'REVISION_NOT_FOUND',
+      });
+    }
+    if (schedule.userId !== userId) {
+      throw new ForbiddenException({
+        message: 'Access denied: you do not own this revision schedule',
+        code: 'REVISION_OWNERSHIP_VIOLATION',
+      });
+    }
+
+    const userSettings = await this.prisma.userSetting.findUnique({ where: { userId } });
+    const customIntervals = Array.isArray(userSettings?.customRevisionIntervals)
+      ? (userSettings?.customRevisionIntervals as number[])
+      : undefined;
+
+    const srResult = this.computeNextSchedule({
+      algorithm: schedule.algorithm,
+      repetitionNumber: schedule.repetitionNumber,
+      easinessFactor: Number(schedule.easinessFactor),
+      previousIntervalDays: schedule.intervalDays,
+      difficultyRating: dto.difficultyRating,
+      customIntervals,
+    });
+
+    const updated = await this.prisma.$transaction(async (tx) => {
+      const updatedSchedule = await tx.revisionSchedule.update({
+        where: { id: scheduleId },
+        data: {
+          repetitionNumber: srResult.newRepetitionNumber,
+          easinessFactor: srResult.newEasinessFactor,
+          intervalDays: srResult.nextIntervalDays,
+          scheduledFor: srResult.nextRevisionDate,
+          nextRevisionDate: srResult.nextRevisionDate,
+          completedAt: new Date(),
+          status: 'PENDING', // Remains active for the next spaced-repetition cycle
+        },
+      });
+
+      await tx.revisionSession.create({
+        data: {
+          revisionScheduleId: scheduleId,
+          userId,
+          durationMinutes: dto.durationMinutes,
+          difficultyRating: dto.difficultyRating,
+          recallScore: 6 - dto.difficultyRating,
+          notes: dto.notes,
+        },
+      });
+
+      await tx.revisionHistory.create({
+        data: {
+          revisionScheduleId: scheduleId,
+          previousInterval: schedule.intervalDays,
+          newInterval: srResult.nextIntervalDays,
+          previousEasiness: schedule.easinessFactor,
+          newEasiness: srResult.newEasinessFactor,
+          difficultyRating: dto.difficultyRating,
+          nextRevisionDate: srResult.nextRevisionDate,
+        },
+      });
+
+      await tx.revisionTopic.update({
+        where: { id: schedule.revisionTopicId },
+        data: {
+          totalReviews: { increment: 1 },
+          lastReviewedAt: new Date(),
+          masteryLevel: Math.min(5, Math.max(1, srResult.newRepetitionNumber)),
+        },
+      });
+
+      return updatedSchedule;
+    });
+
+    const rewardOutcome = await this.rewardsService.processTrustedActivityEvent({
+      userId,
+      eventCode: 'REVISION_COMPLETED',
+      sourceEntityId: `${scheduleId}:rep:${srResult.newRepetitionNumber}`,
+      description: `Completed spaced-repetition revision (${schedule.algorithm})`,
+    });
+
+    return {
+      schedule: updated,
+      spacedRepetition: srResult,
+      rewardOutcome,
+    };
+  }
+}
