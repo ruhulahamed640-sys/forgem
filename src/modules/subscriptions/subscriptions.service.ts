@@ -5,16 +5,21 @@ import {
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import * as crypto from 'crypto';
 import { PrismaService } from '../../database/prisma/prisma.service';
 import { CreateCheckoutSessionDto } from './dto/subscription.dto';
 
 @Injectable()
 export class SubscriptionsService {
-  private readonly webhookSecret =
-    process.env.PAYMENT_WEBHOOK_SECRET || 'studypilot-webhook-signing-secret-2026';
+  private readonly webhookSecret: string;
 
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly configService: ConfigService,
+  ) {
+    this.webhookSecret = this.configService.get<string>('payment.webhookSecret')!;
+  }
 
   async listPlans() {
     return this.prisma.subscriptionPlan.findMany({

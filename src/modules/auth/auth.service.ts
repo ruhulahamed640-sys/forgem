@@ -28,16 +28,17 @@ const ALLOWED_CLIENTS = new Set([
 
 @Injectable()
 export class AuthService {
-  private readonly accessSecret =
-    process.env.JWT_ACCESS_SECRET || 'studypilot-access-secret-key-2026';
-
-  private readonly logger = new Logger(AuthService.name);
+  private readonly accessSecret: string;
 
   constructor(
     private readonly prisma: PrismaService,
     private readonly emailProvider: EmailRouter,
     private readonly configService: ConfigService,
-  ) { }
+  ) {
+    this.accessSecret = this.configService.get<string>('security.jwtAccessSecret')!;
+  }
+
+  private readonly logger = new Logger(AuthService.name);
 
   private async dispatchEmail(
     action: () => Promise<unknown>,

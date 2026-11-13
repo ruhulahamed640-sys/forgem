@@ -29,3 +29,13 @@ Thumbs.db
 # Uploads / local storage
 uploads/
 tmp/
+tmp-*/
+*.tmp
+
+# Prisma
+prisma/migrations/.migration_lock.toml
+
+# OS
+Thumbs.db
+ehthumbs.db
+Desktop.ini

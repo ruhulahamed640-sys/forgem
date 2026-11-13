@@ -8,7 +8,60 @@ import { json, urlencoded } from 'express';
 import { AppModule } from './app.module';
 import { createGlobalValidationPipe } from './common/pipes/sanitize-validation.pipe';
 
+const REQUIRED_ENV_VARS = [
+  'DATABASE_URL',
+  'DIRECT_DATABASE_URL',
+  'JWT_ACCESS_SECRET',
+  'JWT_REFRESH_SECRET',
+  'COOKIE_SECRET',
+  'CSRF_SECRET',
+] as const;
+
+function validateEnvironment(): void {
+  const missing = REQUIRED_ENV_VARS.filter((key) => !process.env[key]);
+  if (missing.length > 0) {
+    throw new Error(
+      `Missing required environment variables: ${missing.join(', ')}. ` +
+        'Please check your .env file or environment configuration.',
+    );
+  }
+
+  // Validate secret lengths
+  const minSecretLength = 32;
+  if (process.env.JWT_ACCESS_SECRET && process.env.JWT_ACCESS_SECRET.length < minSecretLength) {
+    throw new Error(`JWT_ACCESS_SECRET must be at least ${minSecretLength} characters`);
+  }
+  if (process.env.JWT_REFRESH_SECRET && process.env.JWT_REFRESH_SECRET.length < minSecretLength) {
+    throw new Error(`JWT_REFRESH_SECRET must be at least ${minSecretLength} characters`);
+  }
+  if (process.env.COOKIE_SECRET && process.env.COOKIE_SECRET.length < minSecretLength) {
+    throw new Error(`COOKIE_SECRET must be at least ${minSecretLength} characters`);
+  }
+  if (process.env.CSRF_SECRET && process.env.CSRF_SECRET.length < minSecretLength) {
+    throw new Error(`CSRF_SECRET must be at least ${minSecretLength} characters`);
+  }
+
+  // Warn about development defaults in production
+  if (process.env.NODE_ENV === 'production') {
+    const devDefaults = [
+      { key: 'JWT_ACCESS_SECRET', value: 'studypilot-access-secret-key-2026' },
+      { key: 'JWT_REFRESH_SECRET', value: 'studypilot-refresh-secret-key-2026' },
+      { key: 'COOKIE_SECRET', value: 'studypilot-cookie-secret' },
+      { key: 'CSRF_SECRET', value: 'studypilot-csrf-secret-2026' },
+      { key: 'PAYMENT_WEBHOOK_SECRET', value: 'studypilot-webhook-signing-secret-2026' },
+    ];
+    for (const { key, value } of devDefaults) {
+      if (process.env[key] === value) {
+        console.warn(`⚠️  WARNING: ${key} is using a development default value. Please set a secure random value for production.`);
+      }
+    }
+  }
+}
+
 async function bootstrap() {
+  // Validate environment before initializing the app
+  validateEnvironment();
+
   const app = await NestFactory.create(AppModule, {
     bufferLogs: true,
   });
@@ -27,7 +80,11 @@ async function bootstrap() {
 
   // Security middleware & request size limits
   app.use(helmet());
-  app.use(cookieParser(process.env.COOKIE_SECRET || 'studypilot-cookie-secret'));
+  const cookieSecret = process.env.COOKIE_SECRET;
+  if (!cookieSecret) {
+    throw new Error('COOKIE_SECRET environment variable is required');
+  }
+  app.use(cookieParser(cookieSecret));
   app.use(json({ limit: '1mb' }));
   app.use(urlencoded({ extended: true, limit: '1mb' }));
 
