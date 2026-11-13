@@ -11,6 +11,7 @@ import {
 } from '@nestjs/common';
 
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { Throttle } from '@nestjs/throttler';
 import { Request, Response } from 'express';
 import { AuthService } from './auth.service';
 import {
@@ -59,6 +60,7 @@ export class AuthController {
   }
 
   @Public()
+  @Throttle({ default: { limit: 10, ttl: 60_000 } })
   @Post('register')
   @ApiOperation({ summary: 'Register a new student account' })
   register(@Body() dto: RegisterDto) {
@@ -66,6 +68,7 @@ export class AuthController {
   }
 
   @Public()
+  @Throttle({ default: { limit: 10, ttl: 60_000 } })
   @Post('login')
   @ApiOperation({ summary: 'Authenticate user and issue short-lived JWT + rotating refresh token cookie' })
   async login(
@@ -117,6 +120,7 @@ export class AuthController {
   }
 
   @Public()
+  @Throttle({ default: { limit: 10, ttl: 60_000 } })
   @Post('forgot-password')
   @ApiOperation({ summary: 'Initiate password recovery flow' })
   forgotPassword(@Body() dto: ForgotPasswordDto, @Req() req: Request) {
@@ -124,6 +128,7 @@ export class AuthController {
   }
 
   @Public()
+  @Throttle({ default: { limit: 10, ttl: 60_000 } })
   @Post('reset-password')
   @ApiOperation({ summary: 'Complete password reset and revoke active sessions' })
   resetPassword(@Body() dto: ResetPasswordDto) {
@@ -131,6 +136,7 @@ export class AuthController {
   }
 
   @Public()
+  @Throttle({ default: { limit: 10, ttl: 60_000 } })
   @Post('verify-email')
   @ApiOperation({ summary: 'Verify account email address' })
   verifyEmail(@Body() dto: VerifyEmailDto) {
@@ -138,6 +144,7 @@ export class AuthController {
   }
 
   @Public()
+  @Throttle({ default: { limit: 10, ttl: 60_000 } })
   @Post('resend-verification')
   @ApiOperation({ summary: 'Resend email verification token' })
   resendVerification(@Body() dto: ResendVerificationDto) {

@@ -1,6 +1,7 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import configuration from './config/configuration';
 import databaseConfig from './config/database.config';
 import securityConfig from './config/security.config';
@@ -41,6 +42,17 @@ import { SecurityHeadersMiddleware } from './common/middleware/security-headers.
       isGlobal: true,
       load: [configuration, databaseConfig, securityConfig],
     }),
+    ThrottlerModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (config: ConfigService) => [
+        {
+          name: 'default',
+          ttl: config.get<number>('security.throttle.ttlSeconds', 60) * 1000,
+          limit: config.get<number>('security.throttle.limitDefault', 100),
+        },
+      ],
+    }),
     PrismaModule,
     HealthModule,
     AuthModule,
@@ -68,6 +80,10 @@ import { SecurityHeadersMiddleware } from './common/middleware/security-headers.
     AuditModule,
   ],
   providers: [
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
+    },
     {
       provide: APP_GUARD,
       useClass: JwtAuthGuard,

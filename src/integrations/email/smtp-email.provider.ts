@@ -24,11 +24,16 @@ export class SmtpEmailProvider {
         user: this.config.get<string>('email.user'),
         pass: this.config.get<string>('email.password'),
       },
+      // Never let a slow/unreachable SMTP server block an HTTP request forever.
+      connectionTimeout: this.config.get<number>('email.connectionTimeoutMs') ?? 10000,
+      greetingTimeout: this.config.get<number>('email.greetingTimeoutMs') ?? 10000,
+      socketTimeout: this.config.get<number>('email.socketTimeoutMs') ?? 20000,
     });
   }
 
   async sendEmail(payload: EmailPayload): Promise<{ messageId: string; accepted: boolean }> {
     const from = this.config.get<string>('email.from');
+    const fromName = this.config.get<string>('email.fromName') || 'StudyPilot';
 
     if (!from || !this.config.get<string>('email.user') ||
         !this.config.get<string>('email.password')) {
@@ -37,7 +42,7 @@ export class SmtpEmailProvider {
 
     try {
       const info = await this.transporter.sendMail({
-        from: `"StudyPilot" <${from}>`,
+        from: `"${fromName}" <${from}>`,
         to: payload.to,
         subject: payload.subject,
         html: payload.htmlBody,

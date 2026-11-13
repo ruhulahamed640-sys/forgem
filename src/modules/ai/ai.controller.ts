@@ -1,5 +1,6 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { Throttle } from '@nestjs/throttler';
 import { AiService } from './ai.service';
 import { CurrentUser } from '../../common/decorators/current-user.decorator';
 import { AuthenticatedUser } from '../../common/interfaces/api-response.interface';
@@ -12,6 +13,7 @@ import {
 
 @ApiTags('AI Study Assistant')
 @ApiBearerAuth()
+@Throttle({ default: { limit: 20, ttl: 60_000 } })
 @Controller('ai')
 export class AiController {
   constructor(private readonly aiService: AiService) {}

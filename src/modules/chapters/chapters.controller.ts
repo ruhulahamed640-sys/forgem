@@ -1,9 +1,21 @@
-import { Body, Controller, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Param,
+  ParseUUIDPipe,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { ChaptersService } from './chapters.service';
 import { CurrentUser } from '../../common/decorators/current-user.decorator';
 import { AuthenticatedUser } from '../../common/interfaces/api-response.interface';
-import { CreateChapterDto, CreateTopicDto } from './dto/chapter.dto';
+import {
+  CreateChapterDto,
+  CreateTopicDto,
+  UpdateChapterDto,
+} from './dto/chapter.dto';
 
 @ApiTags('Chapters & Topics')
 @ApiBearerAuth()
@@ -17,10 +29,41 @@ export class ChaptersController {
     return this.chaptersService.createChapter(user.id, dto);
   }
 
+  @Patch(':id')
+  @ApiOperation({ summary: 'Update a chapter, including reordering it within its subject' })
+  updateChapter(
+    @CurrentUser() user: AuthenticatedUser,
+    @Param('id', new ParseUUIDPipe()) id: string,
+    @Body() dto: UpdateChapterDto,
+  ) {
+    return this.chaptersService.updateChapter(user.id, id, dto);
+  }
+
+  @Delete(':id')
+  @ApiOperation({ summary: 'Delete a chapter and its topics, then recalculate subject progress' })
+  deleteChapter(
+    @CurrentUser() user: AuthenticatedUser,
+    @Param('id', new ParseUUIDPipe()) id: string,
+  ) {
+    return this.chaptersService.deleteChapter(user.id, id);
+  }
+
   @Post(':id/complete')
   @ApiOperation({ summary: 'Mark chapter completed and recalculate subject completion percentage' })
-  completeChapter(@CurrentUser() user: AuthenticatedUser, @Param('id') id: string) {
-    return this.chaptersService.completeChapter(user.id, id);
+  completeChapter(
+    @CurrentUser() user: AuthenticatedUser,
+    @Param('id', new ParseUUIDPipe()) id: string,
+  ) {
+    return this.chaptersService.completeChapter(user.id, id, true);
+  }
+
+  @Post(':id/uncomplete')
+  @ApiOperation({ summary: 'Mark chapter incomplete and recalculate subject completion percentage' })
+  uncompleteChapter(
+    @CurrentUser() user: AuthenticatedUser,
+    @Param('id', new ParseUUIDPipe()) id: string,
+  ) {
+    return this.chaptersService.completeChapter(user.id, id, false);
   }
 
   @Post('topics')

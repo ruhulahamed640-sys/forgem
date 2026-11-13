@@ -205,10 +205,6 @@ export class AuthService {
 
         return createdUser;
       },
-      {
-        maxWait: 10000,
-        timeout: 20000,
-      },
     );
 
     // Send verification email
@@ -333,14 +329,7 @@ export class AuthService {
       });
 
       return createdSession;
-    },
-
-      {
-        maxWait: 10000,
-        timeout: 20000,
-
-
-      });
+    });
 
     const accessToken = this.signAccessToken({
       id: user.id,

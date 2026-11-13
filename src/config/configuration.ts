@@ -48,7 +48,15 @@ export default () => ({
     secure: process.env.SMTP_SECURE === 'true',
     user: process.env.SMTP_USER || '',
     password: process.env.SMTP_PASSWORD || '',
-    from: process.env.MAIL_FROM || process.env.SMTP_USER || '',
+    from:
+      process.env.EMAIL_FROM_ADDRESS ||
+      process.env.MAIL_FROM ||
+      process.env.SMTP_USER ||
+      '',
+    fromName: process.env.EMAIL_FROM_NAME || process.env.APP_NAME || 'StudyPilot',
     frontendUrl: process.env.FRONTEND_URL || 'http://localhost:5173',
+    connectionTimeoutMs: parseInt(process.env.SMTP_CONNECTION_TIMEOUT_MS || '10000', 10),
+    greetingTimeoutMs: parseInt(process.env.SMTP_GREETING_TIMEOUT_MS || '10000', 10),
+    socketTimeoutMs: parseInt(process.env.SMTP_SOCKET_TIMEOUT_MS || '20000', 10),
   },
 });

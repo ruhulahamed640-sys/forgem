@@ -30,9 +30,26 @@ export class UsersService {
   }
 
   async updateMyProfile(userId: string, dto: UpdateProfileDto) {
+    const existing = await this.prisma.userProfile.findUnique({ where: { userId } });
+    if (!existing) {
+      throw new NotFoundException({ message: 'Profile not found', code: 'PROFILE_NOT_FOUND' });
+    }
+
+    // Keep the display name in sync when names change unless it was set explicitly.
+    const firstName = dto.firstName ?? existing.firstName;
+    const lastName = dto.lastName ?? existing.lastName;
+    const displayName =
+      dto.displayName ??
+      (dto.firstName !== undefined || dto.lastName !== undefined
+        ? `${firstName} ${lastName}`.trim()
+        : undefined);
+
     return this.prisma.userProfile.update({
       where: { userId },
-      data: dto,
+      data: {
+        ...dto,
+        ...(displayName ? { displayName } : {}),
+      },
     });
   }
 

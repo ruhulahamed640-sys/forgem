@@ -1,6 +1,11 @@
 import { SENSITIVE_FIELDS } from '../constants';
 
 export function redactSensitiveData<T>(input: T): T {
+  if (typeof input === 'bigint') {
+    // Prisma exposes BigInt columns (e.g. storage quotas) and JSON.stringify
+    // cannot serialize BigInt. Quotas fit safely inside Number.MAX_SAFE_INTEGER.
+    return Number(input) as unknown as T;
+  }
   if (input === null || input === undefined || typeof input !== 'object') {
     return input;
   }

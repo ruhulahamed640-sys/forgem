@@ -25,5 +25,7 @@
       "@integrations/*": ["src/integrations/*"],
       "@jobs/*": ["src/jobs/*"]
     }
-  }
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "dist", "test", "prisma"]
 }

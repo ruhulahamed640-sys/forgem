@@ -27,7 +27,8 @@ Interactive OpenAPI / Swagger documentation is served at `/api/docs`.
 ## Endpoint Summary
 - **Auth**: `POST /auth/register`, `POST /auth/login`, `POST /auth/logout`, `POST /auth/refresh`, `POST /auth/forgot-password`, `POST /auth/reset-password`, `POST /auth/verify-email`, `POST /auth/resend-verification`, `GET /auth/me`, `GET /auth/sessions`, `DELETE /auth/sessions/:id`
 - **Users**: `GET /users/me`, `PATCH /users/me`, `DELETE /users/me`, `GET /users/me/settings`, `PATCH /users/me/settings`
-- **Subjects & Chapters**: `GET /subjects`, `POST /subjects`, `GET /subjects/:id`, `PATCH /subjects/:id`, `DELETE /subjects/:id`, `POST /chapters`, `POST /chapters/:id/complete`, `POST /chapters/topics`
+- **Subjects**: `GET /subjects` (`?archived=false|true|all`, `?search=`), `POST /subjects`, `GET /subjects/:id`, `PATCH /subjects/:id` (including `{ "isArchived": true }`), `DELETE /subjects/:id`
+- **Chapters & Topics**: `POST /chapters`, `PATCH /chapters/:id`, `DELETE /chapters/:id`, `POST /chapters/:id/complete`, `POST /chapters/:id/uncomplete`, `POST /chapters/topics`, `PATCH /topics/:id`, `DELETE /topics/:id`, `POST /topics/:id/complete`, `POST /topics/:id/uncomplete`
 - **Assignments**: `GET /assignments`, `POST /assignments`, `GET /assignments/:id`, `PATCH /assignments/:id`, `DELETE /assignments/:id`, `POST /assignments/:id/complete`
 - **Examinations**: `GET /exams`, `POST /exams`, `GET /exams/upcoming`, `GET /exams/:id`, `PATCH /exams/:id`, `DELETE /exams/:id`, `POST /exams/:id/results`
 - **Study Planner**: `GET /planner`, `POST /planner`, `PATCH /planner/:id`, `DELETE /planner/:id`, `POST /planner/:id/complete`

@@ -4,10 +4,12 @@ import {
   Delete,
   Get,
   Param,
+  ParseUUIDPipe,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
 import { SubjectsService } from './subjects.service';
 import { CurrentUser } from '../../common/decorators/current-user.decorator';
 import { AuthenticatedUser } from '../../common/interfaces/api-response.interface';
@@ -21,8 +23,14 @@ export class SubjectsController {
 
   @Get()
   @ApiOperation({ summary: 'List all subjects owned by the authenticated student' })
-  list(@CurrentUser() user: AuthenticatedUser) {
-    return this.subjectsService.listSubjects(user.id);
+  @ApiQuery({ name: 'archived', required: false, enum: ['false', 'true', 'all'] })
+  @ApiQuery({ name: 'search', required: false, description: 'Case-insensitive name/code match' })
+  list(
+    @CurrentUser() user: AuthenticatedUser,
+    @Query('archived') archived?: string,
+    @Query('search') search?: string,
+  ) {
+    return this.subjectsService.listSubjects(user.id, { archived, search });
   }
 
   @Post()
@@ -33,23 +41,29 @@ export class SubjectsController {
 
   @Get(':id')
   @ApiOperation({ summary: 'Retrieve subject details with chapters, topics, and progress' })
-  getOne(@CurrentUser() user: AuthenticatedUser, @Param('id') id: string) {
+  getOne(
+    @CurrentUser() user: AuthenticatedUser,
+    @Param('id', new ParseUUIDPipe()) id: string,
+  ) {
     return this.subjectsService.getSubjectById(user.id, id);
   }
 
   @Patch(':id')
-  @ApiOperation({ summary: 'Update a subject owned by the authenticated student' })
+  @ApiOperation({ summary: 'Update or archive a subject owned by the authenticated student' })
   update(
     @CurrentUser() user: AuthenticatedUser,
-    @Param('id') id: string,
+    @Param('id', new ParseUUIDPipe()) id: string,
     @Body() dto: UpdateSubjectDto,
   ) {
     return this.subjectsService.updateSubject(user.id, id, dto);
   }
 
   @Delete(':id')
-  @ApiOperation({ summary: 'Delete a subject owned by the authenticated student' })
-  remove(@CurrentUser() user: AuthenticatedUser, @Param('id') id: string) {
+  @ApiOperation({ summary: 'Permanently delete a subject (and its chapters, topics, and progress)' })
+  remove(
+    @CurrentUser() user: AuthenticatedUser,
+    @Param('id', new ParseUUIDPipe()) id: string,
+  ) {
     return this.subjectsService.deleteSubject(user.id, id);
   }
 }

@@ -1,3 +1,5 @@
+import 'dotenv/config';
+import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as cookieParser from 'cookie-parser';
@@ -10,6 +12,15 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     bufferLogs: true,
   });
+  const logger = new Logger('Bootstrap');
+
+  // Trust the first proxy hop (load balancer / reverse proxy) so req.ip is accurate.
+  if (process.env.TRUST_PROXY === 'true' || process.env.NODE_ENV === 'production') {
+    app.getHttpAdapter().getInstance().set('trust proxy', 1);
+  }
+
+  // Gracefully release DB/Redis connections when the process is stopped.
+  app.enableShutdownHooks();
 
   const apiPrefix = process.env.API_PREFIX || 'api/v1';
   app.setGlobalPrefix(apiPrefix);
@@ -69,6 +80,15 @@ async function bootstrap() {
 
   const port = parseInt(process.env.PORT || '4000', 10);
   await app.listen(port);
+  logger.log(`StudyPilot API listening on http://localhost:${port}/${apiPrefix}`);
+  logger.log(`Swagger docs available at http://localhost:${port}/api/docs`);
 }
 
-bootstrap();
+bootstrap().catch((error) => {
+  const logger = new Logger('Bootstrap');
+  logger.error(
+    'Application failed to start',
+    error instanceof Error ? error.stack : String(error),
+  );
+  process.exit(1);
+});

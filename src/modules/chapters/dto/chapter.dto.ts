@@ -1,4 +1,14 @@
-import { IsBoolean, IsInt, IsNotEmpty, IsOptional, IsString, IsUUID, Min } from 'class-validator';
+import {
+  IsBoolean,
+  IsInt,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  IsUUID,
+  Max,
+  MaxLength,
+  Min,
+} from 'class-validator';
 
 export class CreateChapterDto {
   @IsUUID()
@@ -6,6 +16,7 @@ export class CreateChapterDto {
 
   @IsString()
   @IsNotEmpty()
+  @MaxLength(200)
   title!: string;
 
   @IsInt()
@@ -22,12 +33,39 @@ export class CreateChapterDto {
   estimatedMinutes?: number;
 }
 
+export class UpdateChapterDto {
+  @IsOptional()
+  @IsString()
+  @IsNotEmpty()
+  @MaxLength(200)
+  title?: string;
+
+  @IsOptional()
+  @IsString()
+  description?: string;
+
+  @IsOptional()
+  @IsInt()
+  @Min(5)
+  estimatedMinutes?: number;
+
+  @IsOptional()
+  @IsInt()
+  @Min(1)
+  orderIndex?: number;
+
+  @IsOptional()
+  @IsBoolean()
+  isCompleted?: boolean;
+}
+
 export class CreateTopicDto {
   @IsUUID()
   chapterId!: string;
 
   @IsString()
   @IsNotEmpty()
+  @MaxLength(200)
   title!: string;
 
   @IsInt()
@@ -36,9 +74,44 @@ export class CreateTopicDto {
 
   @IsOptional()
   @IsInt()
+  @Min(1)
+  @Max(5)
   difficultyLevel?: number;
 
   @IsOptional()
-  @IsBoolean()
-  isCompleted?: boolean;
+  @IsString()
+  contentSummary?: string;
+
+  @IsOptional()
+  @IsInt()
+  @Min(5)
+  estimatedMinutes?: number;
+}
+
+export class UpdateTopicDto {
+  @IsOptional()
+  @IsString()
+  @IsNotEmpty()
+  @MaxLength(200)
+  title?: string;
+
+  @IsOptional()
+  @IsString()
+  contentSummary?: string;
+
+  @IsOptional()
+  @IsInt()
+  @Min(1)
+  @Max(5)
+  difficultyLevel?: number;
+
+  @IsOptional()
+  @IsInt()
+  @Min(5)
+  estimatedMinutes?: number;
+
+  @IsOptional()
+  @IsInt()
+  @Min(1)
+  orderIndex?: number;
 }
