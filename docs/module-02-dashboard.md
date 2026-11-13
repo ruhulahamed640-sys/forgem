@@ -12,8 +12,10 @@
 
 | Environment | Base URL | Status |
 |---|---|---|
-| Development | `http://localhost:4000/api/v1` | **Verified live** |
-| Swagger | `http://localhost:4000/api/docs` | **Verified live** |
+| Development | `http://localhost:4000/api/v1` | **Verified live** (local) |
+| Swagger | `http://localhost:4000/api/docs` | **Verified live** (local) |
+| Production (Render) | `https://forgem.onrender.com/api/v1` | **Live** |
+| Swagger (Render) | `https://forgem.onrender.com/api/docs` | **Live** |
 | Staging | *not configured* | ❌ no staging deployment exists |
 | Production (intended) | `https://api.studypilot.io/api/v1` | ⚠️ from `APP_URL`, not verified |
 

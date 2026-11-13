@@ -14,7 +14,10 @@
 |---|---|---|
 | Development (local) | `http://localhost:4000/api/v1` | **Verified live** |
 | Swagger UI | `http://localhost:4000/api/docs` | **Verified live** |
-| Health check | `http://localhost:4000/api/v1/health` | **Verified live** |
+| Health check | `http://localhost:4000/api/v1/health` | **Verified live** (local) |
+| Production (Render) | `https://forgem.onrender.com/api/v1` | **Live** |
+| Swagger (Render) | `https://forgem.onrender.com/api/docs` | **Live** |
+| Health check (Render) | `https://forgem.onrender.com/api/v1/health` | **Live** |
 | Staging | *not configured / not deployed* | No staging env file or host exists |
 | Production (intended) | `https://api.studypilot.io/api/v1` | From `APP_URL`; not verified |
 

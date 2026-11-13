@@ -1,0 +1,732 @@
+[
+  {
+    "label": "b.subject.create",
+    "request": {
+      "method": "POST",
+      "path": "/subjects",
+      "body": {
+        "name": "Computer Networks"
+      }
+    },
+    "status": 201,
+    "durationMs": 9024,
+    "response": {
+      "success": true,
+      "message": "Operation completed successfully",
+      "data": {
+        "id": "b9a8e29a-45ec-4263-81e7-dee5e0bd1f0a",
+        "userId": "d4f8174b-34ff-45ac-a7f6-a784ac2008d0",
+        "academicYearId": null,
+        "classId": null,
+        "name": "Computer Networks",
+        "code": null,
+        "colorHex": "#4F46E5",
+        "icon": null,
+        "targetWeeklyMinutes": 180,
+        "isArchived": false,
+        "createdAt": "2026-11-13T03:52:26.449Z",
+        "updatedAt": "2026-11-13T03:52:26.449Z"
+      },
+      "meta": {}
+    }
+  },
+  {
+    "label": "b.subject.create.second",
+    "request": {
+      "method": "POST",
+      "path": "/subjects",
+      "body": {
+        "name": "Computer Architecture"
+      }
+    },
+    "status": 201,
+    "durationMs": 8420,
+    "response": {
+      "success": true,
+      "message": "Operation completed successfully",
+      "data": {
+        "id": "6ee916b4-3d2d-4f81-b449-a0db4526b694",
+        "userId": "d4f8174b-34ff-45ac-a7f6-a784ac2008d0",
+        "academicYearId": null,
+        "classId": null,
+        "name": "Computer Architecture",
+        "code": null,
+        "colorHex": "#4F46E5",
+        "icon": null,
+        "targetWeeklyMinutes": 180,
+        "isArchived": false,
+        "createdAt": "2026-11-13T03:52:34.889Z",
+        "updatedAt": "2026-11-13T03:52:34.889Z"
+      },
+      "meta": {}
+    }
+  },
+  {
+    "label": "b.subject.rename-existing",
+    "request": {
+      "method": "PATCH",
+      "path": "/subjects/6ee916b4-3d2d-4f81-b449-a0db4526b694",
+      "body": {
+        "name": "computer networks"
+      }
+    },
+    "status": 409,
+    "durationMs": 11238,
+    "response": {
+      "success": false,
+      "message": "A subject with this name already exists",
+      "error": {
+        "code": "SUBJECT_ALREADY_EXISTS",
+        "details": []
+      }
+    }
+  },
+  {
+    "label": "b.subjects.search-name",
+    "request": {
+      "method": "GET",
+      "path": "/subjects?search=computer"
+    },
+    "status": 200,
+    "durationMs": 7079,
+    "response": {
+      "success": true,
+      "message": "Operation completed successfully",
+      "data": [
+        {
+          "id": "b9a8e29a-45ec-4263-81e7-dee5e0bd1f0a",
+          "userId": "d4f8174b-34ff-45ac-a7f6-a784ac2008d0",
+          "academicYearId": null,
+          "classId": null,
+          "name": "Computer Networks",
+          "code": null,
+          "colorHex": "#4F46E5",
+          "icon": null,
+          "targetWeeklyMinutes": 180,
+          "isArchived": false,
+          "createdAt": "2026-11-13T03:52:26.449Z",
+          "updatedAt": "2026-11-13T03:52:26.449Z",
+          "chapters": [],
+          "subjectProgress": [
+            {
+              "id": "4be9aca6-d2a1-4cd9-8885-1d0a73f24d65",
+              "userId": "d4f8174b-34ff-45ac-a7f6-a784ac2008d0",
+              "subjectId": "b9a8e29a-45ec-4263-81e7-dee5e0bd1f0a",
+              "totalChapters": 0,
+              "completedChapters": 0,
+              "totalTopics": 0,
+              "completedTopics": 0,
+              "completionPercentage": "0",
+              "totalStudyMinutes": 0,
+              "lastStudiedAt": null,
+              "updatedAt": "2026-11-13T03:52:27.333Z"
+            }
+          ]
+        },
+        {
+          "id": "6ee916b4-3d2d-4f81-b449-a0db4526b694",
+          "userId": "d4f8174b-34ff-45ac-a7f6-a784ac2008d0",
+          "academicYearId": null,
+          "classId": null,
+          "name": "Computer Architecture",
+          "code": null,
+          "colorHex": "#4F46E5",
+          "icon": null,
+          "targetWeeklyMinutes": 180,
+          "isArchived": false,
+          "createdAt": "2026-11-13T03:52:34.889Z",
+          "updatedAt": "2026-11-13T03:52:34.889Z",
+          "chapters": [],
+          "subjectProgress": [
+            {
+              "id": "73ae9cf7-b27c-4f86-807e-61e68ec7c30a",
+              "userId": "d4f8174b-34ff-45ac-a7f6-a784ac2008d0",
+              "subjectId": "6ee916b4-3d2d-4f81-b449-a0db4526b694",
+              "totalChapters": 0,
+              "completedChapters": 0,
+              "totalTopics": 0,
+              "completedTopics": 0,
+              "completionPercentage": "0",
+              "totalStudyMinutes": 0,
+              "lastStudiedAt": null,
+              "updatedAt": "2026-11-13T03:52:35.810Z"
+            }
+          ]
+        }
+      ],
+      "meta": {}
+    }
+  },
+  {
+    "label": "b.chapter.create",
+    "request": {
+      "method": "POST",
+      "path": "/chapters",
+      "body": {
+        "subjectId": "b9a8e29a-45ec-4263-81e7-dee5e0bd1f0a",
+        "title": "The Link Layer",
+        "orderIndex": 1
+      }
+    },
+    "status": 201,
+    "durationMs": 25562,
+    "response": {
+      "success": true,
+      "message": "Operation completed successfully",
+      "data": {
+        "id": "e32b6f8b-a746-450a-ad03-03c59686e93a",
+        "subjectId": "b9a8e29a-45ec-4263-81e7-dee5e0bd1f0a",
+        "title": "The Link Layer",
+        "orderIndex": 1,
+        "description": null,
+        "estimatedMinutes": 60,
+        "isCompleted": false,
+        "completedAt": null,
+        "createdAt": "2026-11-13T03:53:05.813Z",
+        "updatedAt": "2026-11-13T03:53:05.813Z"
+      },
+      "meta": {}
+    }
+  },
+  {
+    "label": "b.chapter.create.second",
+    "request": {
+      "method": "POST",
+      "path": "/chapters",
+      "body": {
+        "subjectId": "b9a8e29a-45ec-4263-81e7-dee5e0bd1f0a",
+        "title": "The Network Layer",
+        "orderIndex": 1
+      }
+    },
+    "status": 201,
+    "durationMs": 20237,
+    "response": {
+      "success": true,
+      "message": "Operation completed successfully",
+      "data": {
+        "id": "77b70f20-f332-4267-ae6e-1bd7513a723c",
+        "subjectId": "b9a8e29a-45ec-4263-81e7-dee5e0bd1f0a",
+        "title": "The Network Layer",
+        "orderIndex": 1,
+        "description": null,
+        "estimatedMinutes": 60,
+        "isCompleted": false,
+        "completedAt": null,
+        "createdAt": "2026-11-13T03:53:28.345Z",
+        "updatedAt": "2026-11-13T03:53:28.345Z"
+      },
+      "meta": {}
+    }
+  },
+  {
+    "label": "b.chapter.create.third",
+    "request": {
+      "method": "POST",
+      "path": "/chapters",
+      "body": {
+        "subjectId": "b9a8e29a-45ec-4263-81e7-dee5e0bd1f0a",
+        "title": "Transport Layer",
+        "orderIndex": 2
+      }
+    },
+    "status": 201,
+    "durationMs": 25764,
+    "response": {
+      "success": true,
+      "message": "Operation completed successfully",
+      "data": {
+        "id": "15cc532e-5cc6-473d-a9f6-15a6e9edadcf",
+        "subjectId": "b9a8e29a-45ec-4263-81e7-dee5e0bd1f0a",
+        "title": "Transport Layer",
+        "orderIndex": 2,
+        "description": null,
+        "estimatedMinutes": 60,
+        "isCompleted": false,
+        "completedAt": null,
+        "createdAt": "2026-11-13T03:53:51.501Z",
+        "updatedAt": "2026-11-13T03:53:51.501Z"
+      },
+      "meta": {}
+    }
+  },
+  {
+    "label": "b.chapter.reorder.transport-to-1",
+    "request": {
+      "method": "PATCH",
+      "path": "/chapters/15cc532e-5cc6-473d-a9f6-15a6e9edadcf",
+      "body": {
+        "orderIndex": 1
+      }
+    },
+    "status": 200,
+    "durationMs": 20231,
+    "response": {
+      "success": true,
+      "message": "Operation completed successfully",
+      "data": {
+        "id": "15cc532e-5cc6-473d-a9f6-15a6e9edadcf",
+        "subjectId": "b9a8e29a-45ec-4263-81e7-dee5e0bd1f0a",
+        "title": "Transport Layer",
+        "orderIndex": 1,
+        "description": null,
+        "estimatedMinutes": 60,
+        "isCompleted": false,
+        "completedAt": null,
+        "createdAt": "2026-11-13T03:53:51.501Z",
+        "updatedAt": "2026-11-13T03:53:51.501Z",
+        "topics": []
+      },
+      "meta": {}
+    }
+  },
+  {
+    "label": "b.chapter.reorder.transport-to-3",
+    "request": {
+      "method": "PATCH",
+      "path": "/chapters/15cc532e-5cc6-473d-a9f6-15a6e9edadcf",
+      "body": {
+        "orderIndex": 3
+      }
+    },
+    "status": 200,
+    "durationMs": 18907,
+    "response": {
+      "success": true,
+      "message": "Operation completed successfully",
+      "data": {
+        "id": "15cc532e-5cc6-473d-a9f6-15a6e9edadcf",
+        "subjectId": "b9a8e29a-45ec-4263-81e7-dee5e0bd1f0a",
+        "title": "Transport Layer",
+        "orderIndex": 3,
+        "description": null,
+        "estimatedMinutes": 60,
+        "isCompleted": false,
+        "completedAt": null,
+        "createdAt": "2026-11-13T03:53:51.501Z",
+        "updatedAt": "2026-11-13T03:53:51.501Z",
+        "topics": []
+      },
+      "meta": {}
+    }
+  },
+  {
+    "label": "b.topic.create",
+    "request": {
+      "method": "POST",
+      "path": "/chapters/topics",
+      "body": {
+        "chapterId": "e32b6f8b-a746-450a-ad03-03c59686e93a",
+        "title": "Ethernet & Switching",
+        "orderIndex": 1
+      }
+    },
+    "status": 201,
+    "durationMs": 24919,
+    "response": {
+      "success": true,
+      "message": "Operation completed successfully",
+      "data": {
+        "id": "45123c16-06f9-4da5-a981-c6f646848498",
+        "chapterId": "e32b6f8b-a746-450a-ad03-03c59686e93a",
+        "title": "Ethernet & Switching",
+        "orderIndex": 1,
+        "contentSummary": null,
+        "difficultyLevel": 3,
+        "estimatedMinutes": 30,
+        "createdAt": "2026-11-13T03:54:55.293Z",
+        "updatedAt": "2026-11-13T03:54:55.293Z"
+      },
+      "meta": {}
+    }
+  },
+  {
+    "label": "b.topic.create.second",
+    "request": {
+      "method": "POST",
+      "path": "/chapters/topics",
+      "body": {
+        "chapterId": "e32b6f8b-a746-450a-ad03-03c59686e93a",
+        "title": "ARP & VLANs",
+        "orderIndex": 1
+      }
+    },
+    "status": 201,
+    "durationMs": 24568,
+    "response": {
+      "success": true,
+      "message": "Operation completed successfully",
+      "data": {
+        "id": "5f170198-7c26-40b7-a778-e8f6fa8b17e4",
+        "chapterId": "e32b6f8b-a746-450a-ad03-03c59686e93a",
+        "title": "ARP & VLANs",
+        "orderIndex": 1,
+        "contentSummary": null,
+        "difficultyLevel": 3,
+        "estimatedMinutes": 30,
+        "createdAt": "2026-11-13T03:55:20.150Z",
+        "updatedAt": "2026-11-13T03:55:20.150Z"
+      },
+      "meta": {}
+    }
+  },
+  {
+    "label": "b.topic.reorder.arp-to-2",
+    "request": {
+      "method": "PATCH",
+      "path": "/topics/5f170198-7c26-40b7-a778-e8f6fa8b17e4",
+      "body": {
+        "orderIndex": 2
+      }
+    },
+    "status": 200,
+    "durationMs": 17309,
+    "response": {
+      "success": true,
+      "message": "Operation completed successfully",
+      "data": {
+        "id": "5f170198-7c26-40b7-a778-e8f6fa8b17e4",
+        "chapterId": "e32b6f8b-a746-450a-ad03-03c59686e93a",
+        "title": "ARP & VLANs",
+        "orderIndex": 2,
+        "contentSummary": null,
+        "difficultyLevel": 3,
+        "estimatedMinutes": 30,
+        "createdAt": "2026-11-13T03:55:20.150Z",
+        "updatedAt": "2026-11-13T03:55:20.150Z"
+      },
+      "meta": {}
+    }
+  },
+  {
+    "label": "b.topic.complete",
+    "request": {
+      "method": "POST",
+      "path": "/topics/45123c16-06f9-4da5-a981-c6f646848498/complete"
+    },
+    "status": 201,
+    "durationMs": 19291,
+    "response": {
+      "success": true,
+      "message": "Operation completed successfully",
+      "data": {
+        "progress": {
+          "id": "2df8f2fb-b6b3-4b78-a199-b5fd9119a372",
+          "userId": "d4f8174b-34ff-45ac-a7f6-a784ac2008d0",
+          "topicId": "45123c16-06f9-4da5-a981-c6f646848498",
+          "isCompleted": true,
+          "completionPercentage": "100",
+          "confidenceScore": 3,
+          "timeSpentMinutes": 0,
+          "completedAt": "2026-11-13T03:56:01.450Z",
+          "updatedAt": "2026-11-13T03:56:01.452Z"
+        },
+        "subjectProgress": {
+          "id": "4be9aca6-d2a1-4cd9-8885-1d0a73f24d65",
+          "userId": "d4f8174b-34ff-45ac-a7f6-a784ac2008d0",
+          "subjectId": "b9a8e29a-45ec-4263-81e7-dee5e0bd1f0a",
+          "totalChapters": 3,
+          "completedChapters": 0,
+          "totalTopics": 2,
+          "completedTopics": 1,
+          "completionPercentage": "0",
+          "totalStudyMinutes": 0,
+          "lastStudiedAt": "2026-11-13T03:56:09.987Z",
+          "updatedAt": "2026-11-13T03:56:09.988Z"
+        }
+      },
+      "meta": {}
+    }
+  },
+  {
+    "label": "b.subject.detail",
+    "request": {
+      "method": "GET",
+      "path": "/subjects/b9a8e29a-45ec-4263-81e7-dee5e0bd1f0a"
+    },
+    "status": 200,
+    "durationMs": 10227,
+    "response": {
+      "success": true,
+      "message": "Operation completed successfully",
+      "data": {
+        "id": "b9a8e29a-45ec-4263-81e7-dee5e0bd1f0a",
+        "userId": "d4f8174b-34ff-45ac-a7f6-a784ac2008d0",
+        "academicYearId": null,
+        "classId": null,
+        "name": "Computer Networks",
+        "code": null,
+        "colorHex": "#4F46E5",
+        "icon": null,
+        "targetWeeklyMinutes": 180,
+        "isArchived": false,
+        "createdAt": "2026-11-13T03:52:26.449Z",
+        "updatedAt": "2026-11-13T03:52:26.449Z",
+        "chapters": [
+          {
+            "id": "77b70f20-f332-4267-ae6e-1bd7513a723c",
+            "subjectId": "b9a8e29a-45ec-4263-81e7-dee5e0bd1f0a",
+            "title": "The Network Layer",
+            "orderIndex": 1,
+            "description": null,
+            "estimatedMinutes": 60,
+            "isCompleted": false,
+            "completedAt": null,
+            "createdAt": "2026-11-13T03:53:28.345Z",
+            "updatedAt": "2026-11-13T03:53:28.345Z",
+            "topics": []
+          },
+          {
+            "id": "e32b6f8b-a746-450a-ad03-03c59686e93a",
+            "subjectId": "b9a8e29a-45ec-4263-81e7-dee5e0bd1f0a",
+            "title": "The Link Layer",
+            "orderIndex": 2,
+            "description": null,
+            "estimatedMinutes": 60,
+            "isCompleted": false,
+            "completedAt": null,
+            "createdAt": "2026-11-13T03:53:05.813Z",
+            "updatedAt": "2026-11-13T03:53:05.813Z",
+            "topics": [
+              {
+                "id": "45123c16-06f9-4da5-a981-c6f646848498",
+                "chapterId": "e32b6f8b-a746-450a-ad03-03c59686e93a",
+                "title": "Ethernet & Switching",
+                "orderIndex": 1,
+                "contentSummary": null,
+                "difficultyLevel": 3,
+                "estimatedMinutes": 30,
+                "createdAt": "2026-11-13T03:54:55.293Z",
+                "updatedAt": "2026-11-13T03:54:55.293Z",
+                "topicProgress": [
+                  {
+                    "id": "2df8f2fb-b6b3-4b78-a199-b5fd9119a372",
+                    "userId": "d4f8174b-34ff-45ac-a7f6-a784ac2008d0",
+                    "topicId": "45123c16-06f9-4da5-a981-c6f646848498",
+                    "isCompleted": true,
+                    "completionPercentage": "100",
+                    "confidenceScore": 3,
+                    "timeSpentMinutes": 0,
+                    "completedAt": "2026-11-13T03:56:01.450Z",
+                    "updatedAt": "2026-11-13T03:56:01.452Z"
+                  }
+                ]
+              },
+              {
+                "id": "5f170198-7c26-40b7-a778-e8f6fa8b17e4",
+                "chapterId": "e32b6f8b-a746-450a-ad03-03c59686e93a",
+                "title": "ARP & VLANs",
+                "orderIndex": 2,
+                "contentSummary": null,
+                "difficultyLevel": 3,
+                "estimatedMinutes": 30,
+                "createdAt": "2026-11-13T03:55:20.150Z",
+                "updatedAt": "2026-11-13T03:55:20.150Z",
+                "topicProgress": []
+              }
+            ]
+          },
+          {
+            "id": "15cc532e-5cc6-473d-a9f6-15a6e9edadcf",
+            "subjectId": "b9a8e29a-45ec-4263-81e7-dee5e0bd1f0a",
+            "title": "Transport Layer",
+            "orderIndex": 3,
+            "description": null,
+            "estimatedMinutes": 60,
+            "isCompleted": false,
+            "completedAt": null,
+            "createdAt": "2026-11-13T03:53:51.501Z",
+            "updatedAt": "2026-11-13T03:53:51.501Z",
+            "topics": []
+          }
+        ],
+        "subjectProgress": [
+          {
+            "id": "4be9aca6-d2a1-4cd9-8885-1d0a73f24d65",
+            "userId": "d4f8174b-34ff-45ac-a7f6-a784ac2008d0",
+            "subjectId": "b9a8e29a-45ec-4263-81e7-dee5e0bd1f0a",
+            "totalChapters": 3,
+            "completedChapters": 0,
+            "totalTopics": 2,
+            "completedTopics": 1,
+            "completionPercentage": "0",
+            "totalStudyMinutes": 0,
+            "lastStudiedAt": "2026-11-13T03:56:09.987Z",
+            "updatedAt": "2026-11-13T03:56:09.988Z"
+          }
+        ]
+      },
+      "meta": {}
+    }
+  },
+  {
+    "label": "b.subjects.list",
+    "request": {
+      "method": "GET",
+      "path": "/subjects"
+    },
+    "status": 200,
+    "durationMs": 9323,
+    "response": {
+      "success": true,
+      "message": "Operation completed successfully",
+      "data": [
+        {
+          "id": "b9a8e29a-45ec-4263-81e7-dee5e0bd1f0a",
+          "userId": "d4f8174b-34ff-45ac-a7f6-a784ac2008d0",
+          "academicYearId": null,
+          "classId": null,
+          "name": "Computer Networks",
+          "code": null,
+          "colorHex": "#4F46E5",
+          "icon": null,
+          "targetWeeklyMinutes": 180,
+          "isArchived": false,
+          "createdAt": "2026-11-13T03:52:26.449Z",
+          "updatedAt": "2026-11-13T03:52:26.449Z",
+          "chapters": [
+            {
+              "id": "77b70f20-f332-4267-ae6e-1bd7513a723c",
+              "subjectId": "b9a8e29a-45ec-4263-81e7-dee5e0bd1f0a",
+              "title": "The Network Layer",
+              "orderIndex": 1,
+              "description": null,
+              "estimatedMinutes": 60,
+              "isCompleted": false,
+              "completedAt": null,
+              "createdAt": "2026-11-13T03:53:28.345Z",
+              "updatedAt": "2026-11-13T03:53:28.345Z",
+              "topics": []
+            },
+            {
+              "id": "e32b6f8b-a746-450a-ad03-03c59686e93a",
+              "subjectId": "b9a8e29a-45ec-4263-81e7-dee5e0bd1f0a",
+              "title": "The Link Layer",
+              "orderIndex": 2,
+              "description": null,
+              "estimatedMinutes": 60,
+              "isCompleted": false,
+              "completedAt": null,
+              "createdAt": "2026-11-13T03:53:05.813Z",
+              "updatedAt": "2026-11-13T03:53:05.813Z",
+              "topics": [
+                {
+                  "id": "45123c16-06f9-4da5-a981-c6f646848498",
+                  "chapterId": "e32b6f8b-a746-450a-ad03-03c59686e93a",
+                  "title": "Ethernet & Switching",
+                  "orderIndex": 1,
+                  "contentSummary": null,
+                  "difficultyLevel": 3,
+                  "estimatedMinutes": 30,
+                  "createdAt": "2026-11-13T03:54:55.293Z",
+                  "updatedAt": "2026-11-13T03:54:55.293Z",
+                  "topicProgress": [
+                    {
+                      "id": "2df8f2fb-b6b3-4b78-a199-b5fd9119a372",
+                      "userId": "d4f8174b-34ff-45ac-a7f6-a784ac2008d0",
+                      "topicId": "45123c16-06f9-4da5-a981-c6f646848498",
+                      "isCompleted": true,
+                      "completionPercentage": "100",
+                      "confidenceScore": 3,
+                      "timeSpentMinutes": 0,
+                      "completedAt": "2026-11-13T03:56:01.450Z",
+                      "updatedAt": "2026-11-13T03:56:01.452Z"
+                    }
+                  ]
+                },
+                {
+                  "id": "5f170198-7c26-40b7-a778-e8f6fa8b17e4",
+                  "chapterId": "e32b6f8b-a746-450a-ad03-03c59686e93a",
+                  "title": "ARP & VLANs",
+                  "orderIndex": 2,
+                  "contentSummary": null,
+                  "difficultyLevel": 3,
+                  "estimatedMinutes": 30,
+                  "createdAt": "2026-11-13T03:55:20.150Z",
+                  "updatedAt": "2026-11-13T03:55:20.150Z",
+                  "topicProgress": []
+                }
+              ]
+            },
+            {
+              "id": "15cc532e-5cc6-473d-a9f6-15a6e9edadcf",
+              "subjectId": "b9a8e29a-45ec-4263-81e7-dee5e0bd1f0a",
+              "title": "Transport Layer",
+              "orderIndex": 3,
+              "description": null,
+              "estimatedMinutes": 60,
+              "isCompleted": false,
+              "completedAt": null,
+              "createdAt": "2026-11-13T03:53:51.501Z",
+              "updatedAt": "2026-11-13T03:53:51.501Z",
+              "topics": []
+            }
+          ],
+          "subjectProgress": [
+            {
+              "id": "4be9aca6-d2a1-4cd9-8885-1d0a73f24d65",
+              "userId": "d4f8174b-34ff-45ac-a7f6-a784ac2008d0",
+              "subjectId": "b9a8e29a-45ec-4263-81e7-dee5e0bd1f0a",
+              "totalChapters": 3,
+              "completedChapters": 0,
+              "totalTopics": 2,
+              "completedTopics": 1,
+              "completionPercentage": "0",
+              "totalStudyMinutes": 0,
+              "lastStudiedAt": "2026-11-13T03:56:09.987Z",
+              "updatedAt": "2026-11-13T03:56:09.988Z"
+            }
+          ]
+        },
+        {
+          "id": "6ee916b4-3d2d-4f81-b449-a0db4526b694",
+          "userId": "d4f8174b-34ff-45ac-a7f6-a784ac2008d0",
+          "academicYearId": null,
+          "classId": null,
+          "name": "Computer Architecture",
+          "code": null,
+          "colorHex": "#4F46E5",
+          "icon": null,
+          "targetWeeklyMinutes": 180,
+          "isArchived": false,
+          "createdAt": "2026-11-13T03:52:34.889Z",
+          "updatedAt": "2026-11-13T03:52:34.889Z",
+          "chapters": [],
+          "subjectProgress": [
+            {
+              "id": "73ae9cf7-b27c-4f86-807e-61e68ec7c30a",
+              "userId": "d4f8174b-34ff-45ac-a7f6-a784ac2008d0",
+              "subjectId": "6ee916b4-3d2d-4f81-b449-a0db4526b694",
+              "totalChapters": 0,
+              "completedChapters": 0,
+              "totalTopics": 0,
+              "completedTopics": 0,
+              "completionPercentage": "0",
+              "totalStudyMinutes": 0,
+              "lastStudiedAt": null,
+              "updatedAt": "2026-11-13T03:52:35.810Z"
+            }
+          ]
+        }
+      ],
+      "meta": {}
+    }
+  },
+  {
+    "label": "b.other.subject.detail",
+    "request": {
+      "method": "GET",
+      "path": "/subjects/b9a8e29a-45ec-4263-81e7-dee5e0bd1f0a"
+    },
+    "status": 403,
+    "durationMs": 8999,
+    "response": {
+      "success": false,
+      "message": "Access denied: you do not own this subject",
+      "error": {
+        "code": "SUBJECT_OWNERSHIP_VIOLATION",
+        "details": []
+      }
+    }
+  }
+]

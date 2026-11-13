@@ -238,8 +238,12 @@ export class ChaptersService {
 
     const negative = Prisma.join(
       ids.map((id, i) => Prisma.sql`WHEN ${id}::uuid THEN ${-(i + 1)}`),
+      ' ',
     );
-    const positive = Prisma.join(ids.map((id, i) => Prisma.sql`WHEN ${id}::uuid THEN ${i + 1}`));
+    const positive = Prisma.join(
+      ids.map((id, i) => Prisma.sql`WHEN ${id}::uuid THEN ${i + 1}`),
+      ' ',
+    );
 
     await this.prisma.$transaction([
       this.prisma.$executeRaw`
@@ -270,8 +274,12 @@ export class ChaptersService {
 
     const negative = Prisma.join(
       ids.map((id, i) => Prisma.sql`WHEN ${id}::uuid THEN ${-(i + 1)}`),
+      ' ',
     );
-    const positive = Prisma.join(ids.map((id, i) => Prisma.sql`WHEN ${id}::uuid THEN ${i + 1}`));
+    const positive = Prisma.join(
+      ids.map((id, i) => Prisma.sql`WHEN ${id}::uuid THEN ${i + 1}`),
+      ' ',
+    );
 
     await this.prisma.$transaction([
       this.prisma.$executeRaw`
