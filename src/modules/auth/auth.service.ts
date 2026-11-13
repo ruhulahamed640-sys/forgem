@@ -3,9 +3,11 @@ import {
   ConflictException,
   ForbiddenException,
   Injectable,
+  Logger,
   UnauthorizedException,
 } from '@nestjs/common';
 import * as crypto from 'crypto';
+import { ConfigService } from '@nestjs/config';
 import { PrismaService } from '../../database/prisma/prisma.service';
 import {
   ForgotPasswordDto,
@@ -15,9 +17,7 @@ import {
   VerifyEmailDto,
 } from './dto/auth.dto';
 import { AuthenticatedUser } from '../../common/interfaces/api-response.interface';
-
-import { Logger } from '@nestjs/common';
-import { SmtpEmailProvider } from '../../integrations/email/smtp-email.provider';
+import { EmailRouter } from '../../integrations/email/email.router';
 
 const ALLOWED_CLIENTS = new Set([
   'web-app',
@@ -35,7 +35,8 @@ export class AuthService {
 
   constructor(
     private readonly prisma: PrismaService,
-    private readonly emailProvider: SmtpEmailProvider,
+    private readonly emailProvider: EmailRouter,
+    private readonly configService: ConfigService,
   ) { }
 
   private async dispatchEmail(
@@ -269,12 +270,24 @@ export class AuthService {
       });
     }
 
-    // Require email verification before login
+    // Require email verification before login.
+    // When SMTP is unavailable on the host (Render blocks ports 25/465/587)
+    // we fall back to auto-verifying the user so they are not locked out.
     if (!user.emailVerifiedAt) {
-      throw new ForbiddenException({
-        message: 'Please verify your email before logging in',
-        code: 'EMAIL_NOT_VERIFIED',
-      });
+      const skipVerification = this.configService.get<string>('ALLOW_SKIP_EMAIL_VERIFICATION') === 'true';
+      if (skipVerification) {
+        await this.prisma.user.update({
+          where: { id: user.id },
+          data: { emailVerifiedAt: new Date(), status: 'ACTIVE' },
+        });
+        user.emailVerifiedAt = new Date();
+        user.status = 'ACTIVE';
+      } else {
+        throw new ForbiddenException({
+          message: 'Please verify your email before logging in',
+          code: 'EMAIL_NOT_VERIFIED',
+        });
+      }
     }
 
     if (user.status === 'SUSPENDED' || user.status === 'DELETED') {

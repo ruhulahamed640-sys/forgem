@@ -1,4 +1,3 @@
-
 import { Injectable, Logger, InternalServerErrorException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import * as nodemailer from 'nodemailer';
@@ -10,8 +9,12 @@ export interface EmailPayload {
   text?: string;
 }
 
+export interface EmailTransport {
+  sendEmail(payload: EmailPayload): Promise<{ messageId: string; accepted: boolean }>;
+}
+
 @Injectable()
-export class SmtpEmailProvider {
+export class SmtpEmailProvider implements EmailTransport {
   private readonly logger = new Logger(SmtpEmailProvider.name);
   private readonly transporter: nodemailer.Transporter;
 

@@ -43,6 +43,7 @@ export default () => ({
     webhookSecret: process.env.PAYMENT_WEBHOOK_SECRET || '',
   },
   email: {
+    provider: (process.env.EMAIL_PROVIDER || 'smtp').trim().toLowerCase(),
     host: process.env.SMTP_HOST || 'smtp.gmail.com',
     port: parseInt(process.env.SMTP_PORT || '587', 10),
     secure: process.env.SMTP_SECURE === 'true',
