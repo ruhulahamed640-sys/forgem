@@ -1,0 +1,444 @@
+{
+  "ownerId": "3b777884-0bcd-461d-bf29-60d9ad5abbd7",
+  "subject1Id": "721d9c39-c8b8-48ed-92e7-218d93401b53",
+  "subject2Id": "02c10394-d6b3-4018-a320-43a78e0bd061",
+  "chapterAId": "becc4205-304f-4710-8dc0-54a8c9e1fe3c",
+  "chapterBId": "3d699d7f-3741-45ac-984b-607a589b1305",
+  "chapterCId": "66a6756c-4304-4465-bd29-8ae20777cd41",
+  "topic1Id": "8d3ae2d8-41cd-4c2d-915a-c018bb5e028f",
+  "topic2Id": "482853d7-e50f-4950-9b70-e99221913671",
+  "topic3Id": "ee39adb1-487a-4771-aa26-ba5465202701",
+  "details": {
+    "subjectDefaults": {
+      "success": true,
+      "message": "Operation completed successfully",
+      "data": {
+        "id": "721d9c39-c8b8-48ed-92e7-218d93401b53",
+        "userId": "3b777884-0bcd-461d-bf29-60d9ad5abbd7",
+        "academicYearId": null,
+        "classId": null,
+        "name": "Operating Systems & Concurrency",
+        "code": null,
+        "colorHex": "#4F46E5",
+        "icon": null,
+        "targetWeeklyMinutes": 180,
+        "isArchived": false,
+        "createdAt": "2026-11-13T03:20:59.851Z",
+        "updatedAt": "2026-11-13T03:20:59.851Z"
+      },
+      "meta": {}
+    },
+    "subjectDetailAfterCreate": {
+      "success": true,
+      "message": "Operation completed successfully",
+      "data": {
+        "id": "721d9c39-c8b8-48ed-92e7-218d93401b53",
+        "userId": "3b777884-0bcd-461d-bf29-60d9ad5abbd7",
+        "academicYearId": null,
+        "classId": null,
+        "name": "Operating Systems & Concurrency",
+        "code": null,
+        "colorHex": "#4F46E5",
+        "icon": null,
+        "targetWeeklyMinutes": 180,
+        "isArchived": false,
+        "createdAt": "2026-11-13T03:20:59.851Z",
+        "updatedAt": "2026-11-13T03:20:59.851Z",
+        "chapters": [],
+        "subjectProgress": [
+          {
+            "id": "1cdbbeca-7b19-455f-822d-60bcfaa54731",
+            "userId": "3b777884-0bcd-461d-bf29-60d9ad5abbd7",
+            "subjectId": "721d9c39-c8b8-48ed-92e7-218d93401b53",
+            "totalChapters": 0,
+            "completedChapters": 0,
+            "totalTopics": 0,
+            "completedTopics": 0,
+            "completionPercentage": "0",
+            "totalStudyMinutes": 0,
+            "lastStudiedAt": null,
+            "updatedAt": "2026-11-13T03:21:00.515Z"
+          }
+        ]
+      },
+      "meta": {}
+    },
+    "chapterInsertA": {
+      "id": "becc4205-304f-4710-8dc0-54a8c9e1fe3c",
+      "subjectId": "721d9c39-c8b8-48ed-92e7-218d93401b53",
+      "title": "Foundations",
+      "orderIndex": 1,
+      "description": "Processes, threads, and scheduling.",
+      "estimatedMinutes": 90,
+      "isCompleted": false,
+      "completedAt": null,
+      "createdAt": "2026-11-13T03:26:08.127Z",
+      "updatedAt": "2026-11-13T03:26:12.970Z"
+    },
+    "chapterInsertB": {
+      "id": "3d699d7f-3741-45ac-984b-607a589b1305",
+      "subjectId": "721d9c39-c8b8-48ed-92e7-218d93401b53",
+      "title": "Memory Management",
+      "orderIndex": 1,
+      "description": null,
+      "estimatedMinutes": 60,
+      "isCompleted": false,
+      "completedAt": null,
+      "createdAt": "2026-11-13T03:26:37.286Z",
+      "updatedAt": "2026-11-13T03:27:03.242Z"
+    },
+    "chapterInsertC": {
+      "id": "66a6756c-4304-4465-bd29-8ae20777cd41",
+      "subjectId": "721d9c39-c8b8-48ed-92e7-218d93401b53",
+      "title": "File Systems",
+      "orderIndex": 2,
+      "description": null,
+      "estimatedMinutes": 60,
+      "isCompleted": false,
+      "completedAt": null,
+      "createdAt": "2026-11-13T03:27:58.047Z",
+      "updatedAt": "2026-11-13T03:28:25.218Z"
+    },
+    "treeAfterChapters": {
+      "id": "721d9c39-c8b8-48ed-92e7-218d93401b53",
+      "userId": "3b777884-0bcd-461d-bf29-60d9ad5abbd7",
+      "academicYearId": null,
+      "classId": null,
+      "name": "database systems",
+      "code": "CS-301",
+      "colorHex": "#2563EB",
+      "icon": "cpu",
+      "targetWeeklyMinutes": 300,
+      "isArchived": false,
+      "createdAt": "2026-11-13T03:20:59.851Z",
+      "updatedAt": "2026-11-13T03:25:17.292Z",
+      "chapters": [
+        {
+          "id": "3d699d7f-3741-45ac-984b-607a589b1305",
+          "subjectId": "721d9c39-c8b8-48ed-92e7-218d93401b53",
+          "title": "Memory Management",
+          "orderIndex": 1,
+          "description": null,
+          "estimatedMinutes": 60,
+          "isCompleted": false,
+          "completedAt": null,
+          "createdAt": "2026-11-13T03:26:37.286Z",
+          "updatedAt": "2026-11-13T03:28:23.323Z",
+          "topics": []
+        },
+        {
+          "id": "66a6756c-4304-4465-bd29-8ae20777cd41",
+          "subjectId": "721d9c39-c8b8-48ed-92e7-218d93401b53",
+          "title": "File Systems",
+          "orderIndex": 2,
+          "description": null,
+          "estimatedMinutes": 60,
+          "isCompleted": false,
+          "completedAt": null,
+          "createdAt": "2026-11-13T03:27:58.047Z",
+          "updatedAt": "2026-11-13T03:28:25.218Z",
+          "topics": []
+        },
+        {
+          "id": "becc4205-304f-4710-8dc0-54a8c9e1fe3c",
+          "subjectId": "721d9c39-c8b8-48ed-92e7-218d93401b53",
+          "title": "Foundations",
+          "orderIndex": 3,
+          "description": "Processes, threads, and scheduling.",
+          "estimatedMinutes": 90,
+          "isCompleted": false,
+          "completedAt": null,
+          "createdAt": "2026-11-13T03:26:08.127Z",
+          "updatedAt": "2026-11-13T03:28:28.120Z",
+          "topics": []
+        }
+      ],
+      "subjectProgress": [
+        {
+          "id": "1cdbbeca-7b19-455f-822d-60bcfaa54731",
+          "userId": "3b777884-0bcd-461d-bf29-60d9ad5abbd7",
+          "subjectId": "721d9c39-c8b8-48ed-92e7-218d93401b53",
+          "totalChapters": 3,
+          "completedChapters": 0,
+          "totalTopics": 0,
+          "completedTopics": 0,
+          "completionPercentage": "0",
+          "totalStudyMinutes": 0,
+          "lastStudiedAt": "2026-11-13T03:28:45.290Z",
+          "updatedAt": "2026-11-13T03:28:45.291Z"
+        }
+      ]
+    },
+    "reorder": {
+      "id": "66a6756c-4304-4465-bd29-8ae20777cd41",
+      "subjectId": "721d9c39-c8b8-48ed-92e7-218d93401b53",
+      "title": "File Systems",
+      "orderIndex": 1,
+      "description": null,
+      "estimatedMinutes": 60,
+      "isCompleted": false,
+      "completedAt": null,
+      "createdAt": "2026-11-13T03:27:58.047Z",
+      "updatedAt": "2026-11-13T03:32:03.921Z",
+      "topics": []
+    },
+    "treeAfterReorder": {
+      "id": "721d9c39-c8b8-48ed-92e7-218d93401b53",
+      "userId": "3b777884-0bcd-461d-bf29-60d9ad5abbd7",
+      "academicYearId": null,
+      "classId": null,
+      "name": "database systems",
+      "code": "CS-301",
+      "colorHex": "#2563EB",
+      "icon": "cpu",
+      "targetWeeklyMinutes": 300,
+      "isArchived": false,
+      "createdAt": "2026-11-13T03:20:59.851Z",
+      "updatedAt": "2026-11-13T03:25:17.292Z",
+      "chapters": [
+        {
+          "id": "66a6756c-4304-4465-bd29-8ae20777cd41",
+          "subjectId": "721d9c39-c8b8-48ed-92e7-218d93401b53",
+          "title": "File Systems",
+          "orderIndex": 1,
+          "description": null,
+          "estimatedMinutes": 60,
+          "isCompleted": false,
+          "completedAt": null,
+          "createdAt": "2026-11-13T03:27:58.047Z",
+          "updatedAt": "2026-11-13T03:32:03.921Z",
+          "topics": []
+        },
+        {
+          "id": "3d699d7f-3741-45ac-984b-607a589b1305",
+          "subjectId": "721d9c39-c8b8-48ed-92e7-218d93401b53",
+          "title": "Memory & Virtual Memory",
+          "orderIndex": 2,
+          "description": "Paging and segmentation.",
+          "estimatedMinutes": 120,
+          "isCompleted": false,
+          "completedAt": null,
+          "createdAt": "2026-11-13T03:26:37.286Z",
+          "updatedAt": "2026-11-13T03:32:06.359Z",
+          "topics": []
+        },
+        {
+          "id": "becc4205-304f-4710-8dc0-54a8c9e1fe3c",
+          "subjectId": "721d9c39-c8b8-48ed-92e7-218d93401b53",
+          "title": "Foundations",
+          "orderIndex": 3,
+          "description": "Processes, threads, and scheduling.",
+          "estimatedMinutes": 90,
+          "isCompleted": false,
+          "completedAt": null,
+          "createdAt": "2026-11-13T03:26:08.127Z",
+          "updatedAt": "2026-11-13T03:32:09.639Z",
+          "topics": []
+        }
+      ],
+      "subjectProgress": [
+        {
+          "id": "1cdbbeca-7b19-455f-822d-60bcfaa54731",
+          "userId": "3b777884-0bcd-461d-bf29-60d9ad5abbd7",
+          "subjectId": "721d9c39-c8b8-48ed-92e7-218d93401b53",
+          "totalChapters": 3,
+          "completedChapters": 0,
+          "totalTopics": 0,
+          "completedTopics": 0,
+          "completionPercentage": "0",
+          "totalStudyMinutes": 0,
+          "lastStudiedAt": "2026-11-13T03:32:35.791Z",
+          "updatedAt": "2026-11-13T03:32:35.792Z"
+        }
+      ]
+    },
+    "treeAfterClamp": {
+      "id": "721d9c39-c8b8-48ed-92e7-218d93401b53",
+      "userId": "3b777884-0bcd-461d-bf29-60d9ad5abbd7",
+      "academicYearId": null,
+      "classId": null,
+      "name": "database systems",
+      "code": "CS-301",
+      "colorHex": "#2563EB",
+      "icon": "cpu",
+      "targetWeeklyMinutes": 300,
+      "isArchived": false,
+      "createdAt": "2026-11-13T03:20:59.851Z",
+      "updatedAt": "2026-11-13T03:25:17.292Z",
+      "chapters": [
+        {
+          "id": "66a6756c-4304-4465-bd29-8ae20777cd41",
+          "subjectId": "721d9c39-c8b8-48ed-92e7-218d93401b53",
+          "title": "File Systems",
+          "orderIndex": 1,
+          "description": null,
+          "estimatedMinutes": 60,
+          "isCompleted": false,
+          "completedAt": null,
+          "createdAt": "2026-11-13T03:27:58.047Z",
+          "updatedAt": "2026-11-13T03:34:00.593Z",
+          "topics": []
+        },
+        {
+          "id": "3d699d7f-3741-45ac-984b-607a589b1305",
+          "subjectId": "721d9c39-c8b8-48ed-92e7-218d93401b53",
+          "title": "Memory & Virtual Memory",
+          "orderIndex": 2,
+          "description": "Paging and segmentation.",
+          "estimatedMinutes": 120,
+          "isCompleted": false,
+          "completedAt": null,
+          "createdAt": "2026-11-13T03:26:37.286Z",
+          "updatedAt": "2026-11-13T03:34:04.354Z",
+          "topics": []
+        },
+        {
+          "id": "becc4205-304f-4710-8dc0-54a8c9e1fe3c",
+          "subjectId": "721d9c39-c8b8-48ed-92e7-218d93401b53",
+          "title": "Foundations",
+          "orderIndex": 3,
+          "description": "Processes, threads, and scheduling.",
+          "estimatedMinutes": 90,
+          "isCompleted": false,
+          "completedAt": null,
+          "createdAt": "2026-11-13T03:26:08.127Z",
+          "updatedAt": "2026-11-13T03:34:07.368Z",
+          "topics": []
+        }
+      ],
+      "subjectProgress": [
+        {
+          "id": "1cdbbeca-7b19-455f-822d-60bcfaa54731",
+          "userId": "3b777884-0bcd-461d-bf29-60d9ad5abbd7",
+          "subjectId": "721d9c39-c8b8-48ed-92e7-218d93401b53",
+          "totalChapters": 3,
+          "completedChapters": 0,
+          "totalTopics": 0,
+          "completedTopics": 0,
+          "completionPercentage": "0",
+          "totalStudyMinutes": 0,
+          "lastStudiedAt": "2026-11-13T03:34:23.646Z",
+          "updatedAt": "2026-11-13T03:34:23.647Z"
+        }
+      ]
+    },
+    "progressTwoTopics": [
+      {
+        "id": "1cdbbeca-7b19-455f-822d-60bcfaa54731",
+        "userId": "3b777884-0bcd-461d-bf29-60d9ad5abbd7",
+        "subjectId": "721d9c39-c8b8-48ed-92e7-218d93401b53",
+        "totalChapters": 3,
+        "completedChapters": 0,
+        "totalTopics": 3,
+        "completedTopics": 2,
+        "completionPercentage": "0",
+        "totalStudyMinutes": 0,
+        "lastStudiedAt": "2026-11-13T03:41:37.964Z",
+        "updatedAt": "2026-11-13T03:41:37.966Z",
+        "subject": {
+          "id": "721d9c39-c8b8-48ed-92e7-218d93401b53",
+          "userId": "3b777884-0bcd-461d-bf29-60d9ad5abbd7",
+          "academicYearId": null,
+          "classId": null,
+          "name": "database systems",
+          "code": "CS-301",
+          "colorHex": "#2563EB",
+          "icon": "cpu",
+          "targetWeeklyMinutes": 300,
+          "isArchived": false,
+          "createdAt": "2026-11-13T03:20:59.851Z",
+          "updatedAt": "2026-11-13T03:25:17.292Z"
+        }
+      },
+      {
+        "id": "3050a4cd-0e22-468d-8d29-380debefb2be",
+        "userId": "3b777884-0bcd-461d-bf29-60d9ad5abbd7",
+        "subjectId": "02c10394-d6b3-4018-a320-43a78e0bd061",
+        "totalChapters": 0,
+        "completedChapters": 0,
+        "totalTopics": 0,
+        "completedTopics": 0,
+        "completionPercentage": "0",
+        "totalStudyMinutes": 0,
+        "lastStudiedAt": null,
+        "updatedAt": "2026-11-13T03:21:31.770Z",
+        "subject": {
+          "id": "02c10394-d6b3-4018-a320-43a78e0bd061",
+          "userId": "3b777884-0bcd-461d-bf29-60d9ad5abbd7",
+          "academicYearId": null,
+          "classId": null,
+          "name": "Database Systems",
+          "code": "CS-302",
+          "colorHex": "#0EA5E9",
+          "icon": "database",
+          "targetWeeklyMinutes": 240,
+          "isArchived": false,
+          "createdAt": "2026-11-13T03:21:31.129Z",
+          "updatedAt": "2026-11-13T03:21:31.129Z"
+        }
+      }
+    ],
+    "chapterAComplete": {
+      "id": "becc4205-304f-4710-8dc0-54a8c9e1fe3c",
+      "subjectId": "721d9c39-c8b8-48ed-92e7-218d93401b53",
+      "title": "Foundations",
+      "orderIndex": 1,
+      "description": "Processes, threads, and scheduling.",
+      "estimatedMinutes": 90,
+      "isCompleted": true,
+      "completedAt": "2026-11-13T03:41:49.444Z",
+      "createdAt": "2026-11-13T03:26:08.127Z",
+      "updatedAt": "2026-11-13T03:41:49.446Z"
+    },
+    "chapterBComplete": {
+      "id": "3d699d7f-3741-45ac-984b-607a589b1305",
+      "subjectId": "721d9c39-c8b8-48ed-92e7-218d93401b53",
+      "title": "Memory & Virtual Memory",
+      "orderIndex": 2,
+      "description": "Paging and segmentation.",
+      "estimatedMinutes": 120,
+      "isCompleted": true,
+      "completedAt": "2026-11-13T03:42:04.202Z",
+      "createdAt": "2026-11-13T03:26:37.286Z",
+      "updatedAt": "2026-11-13T03:42:04.203Z"
+    },
+    "chapterAUncomplete": {
+      "id": "becc4205-304f-4710-8dc0-54a8c9e1fe3c",
+      "subjectId": "721d9c39-c8b8-48ed-92e7-218d93401b53",
+      "title": "Foundations",
+      "orderIndex": 1,
+      "description": "Processes, threads, and scheduling.",
+      "estimatedMinutes": 90,
+      "isCompleted": false,
+      "completedAt": null,
+      "createdAt": "2026-11-13T03:26:08.127Z",
+      "updatedAt": "2026-11-13T03:42:20.192Z"
+    },
+    "completeT1": {
+      "progress": {
+        "id": "bc3fe257-c8bd-4955-87e9-9d7b2408390e",
+        "userId": "3b777884-0bcd-461d-bf29-60d9ad5abbd7",
+        "topicId": "8d3ae2d8-41cd-4c2d-915a-c018bb5e028f",
+        "isCompleted": true,
+        "completionPercentage": "100",
+        "confidenceScore": 3,
+        "timeSpentMinutes": 0,
+        "completedAt": "2026-11-13T03:40:34.086Z",
+        "updatedAt": "2026-11-13T03:40:34.087Z"
+      },
+      "subjectProgress": {
+        "id": "1cdbbeca-7b19-455f-822d-60bcfaa54731",
+        "userId": "3b777884-0bcd-461d-bf29-60d9ad5abbd7",
+        "subjectId": "721d9c39-c8b8-48ed-92e7-218d93401b53",
+        "totalChapters": 3,
+        "completedChapters": 0,
+        "totalTopics": 3,
+        "completedTopics": 1,
+        "completionPercentage": "0",
+        "totalStudyMinutes": 0,
+        "lastStudiedAt": "2026-11-13T03:40:37.889Z",
+        "updatedAt": "2026-11-13T03:40:37.890Z"
+      }
+    }
+  }
+}

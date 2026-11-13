@@ -120,17 +120,45 @@ async function cleanup() {
     token: owner.token,
     body: { name: 'computer networks' },
   });
+  await call('b.subjects.search-name', 'GET', '/subjects?search=computer', { token: owner.token });
 
   const ch = await call('b.chapter.create', 'POST', '/chapters', {
     token: owner.token,
     body: { subjectId: s1id, title: 'The Link Layer', orderIndex: 1 },
   });
   const chid = ch.response.data.id;
+  const ch2 = await call('b.chapter.create.second', 'POST', '/chapters', {
+    token: owner.token,
+    body: { subjectId: s1id, title: 'The Network Layer', orderIndex: 1 },
+  });
+  const ch2id = ch2.response.data.id;
+  const ch3 = await call('b.chapter.create.third', 'POST', '/chapters', {
+    token: owner.token,
+    body: { subjectId: s1id, title: 'Transport Layer', orderIndex: 2 },
+  });
+  const ch3id = ch3.response.data.id;
+  await call('b.chapter.reorder.transport-to-1', 'PATCH', `/chapters/${ch3id}`, {
+    token: owner.token,
+    body: { orderIndex: 1 },
+  });
+  await call('b.chapter.reorder.transport-to-3', 'PATCH', `/chapters/${ch3id}`, {
+    token: owner.token,
+    body: { orderIndex: 3 },
+  });
   const t = await call('b.topic.create', 'POST', '/chapters/topics', {
     token: owner.token,
     body: { chapterId: chid, title: 'Ethernet & Switching', orderIndex: 1 },
   });
   const tid = t.response.data.id;
+  const t2 = await call('b.topic.create.second', 'POST', '/chapters/topics', {
+    token: owner.token,
+    body: { chapterId: chid, title: 'ARP & VLANs', orderIndex: 1 },
+  });
+  const t2id = t2.response.data.id;
+  await call('b.topic.reorder.arp-to-2', 'PATCH', `/topics/${t2id}`, {
+    token: owner.token,
+    body: { orderIndex: 2 },
+  });
   await call('b.topic.complete', 'POST', `/topics/${tid}/complete`, { token: owner.token });
   await call('b.subject.detail', 'GET', `/subjects/${s1id}`, { token: owner.token });
   await call('b.subjects.list', 'GET', '/subjects', { token: owner.token });

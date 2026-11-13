@@ -220,8 +220,9 @@ export class ChaptersService {
 
   /**
    * Moves a chapter to `targetPosition` (1-based) and renumbers its siblings.
-   * Two passes (negative, then positive) avoid the [subjectId, orderIndex]
-   * unique constraint mid-update.
+   * Two batched passes (negative, then positive) avoid the
+   * [subjectId, orderIndex] unique constraint mid-update and keep the number
+   * of round-trips constant regardless of sibling count.
    */
   private async applyChapterOrder(subjectId: string, chapterId: string, targetPosition: number) {
     const siblings = await this.prisma.chapter.findMany({
@@ -229,26 +230,29 @@ export class ChaptersService {
       orderBy: { orderIndex: 'asc' },
       select: { id: true },
     });
-    const ids = siblings.map((s) => s.id).filter((id) => id !== chapterId);
     if (!siblings.some((s) => s.id === chapterId)) return;
 
+    const ids = siblings.map((s) => s.id).filter((id) => id !== chapterId);
     const index = Math.min(Math.max(targetPosition, 1), ids.length + 1);
     ids.splice(index - 1, 0, chapterId);
 
-    await this.prisma.$transaction(async (tx) => {
-      for (let i = 0; i < ids.length; i++) {
-        await tx.chapter.update({
-          where: { id: ids[i] },
-          data: { orderIndex: -(i + 1) },
-        });
-      }
-      for (let i = 0; i < ids.length; i++) {
-        await tx.chapter.update({
-          where: { id: ids[i] },
-          data: { orderIndex: i + 1 },
-        });
-      }
-    });
+    const negative = Prisma.join(
+      ids.map((id, i) => Prisma.sql`WHEN ${id}::uuid THEN ${-(i + 1)}`),
+    );
+    const positive = Prisma.join(ids.map((id, i) => Prisma.sql`WHEN ${id}::uuid THEN ${i + 1}`));
+
+    await this.prisma.$transaction([
+      this.prisma.$executeRaw`
+        UPDATE chapters
+        SET order_index = CASE id ${negative} END
+        WHERE subject_id = ${subjectId}::uuid
+      `,
+      this.prisma.$executeRaw`
+        UPDATE chapters
+        SET order_index = CASE id ${positive} END
+        WHERE subject_id = ${subjectId}::uuid
+      `,
+    ]);
   }
 
   /** Same as applyChapterOrder, scoped to one chapter's topic list. */
@@ -258,25 +262,28 @@ export class ChaptersService {
       orderBy: { orderIndex: 'asc' },
       select: { id: true },
     });
-    const ids = siblings.map((s) => s.id).filter((id) => id !== topicId);
     if (!siblings.some((s) => s.id === topicId)) return;
 
+    const ids = siblings.map((s) => s.id).filter((id) => id !== topicId);
     const index = Math.min(Math.max(targetPosition, 1), ids.length + 1);
     ids.splice(index - 1, 0, topicId);
 
-    await this.prisma.$transaction(async (tx) => {
-      for (let i = 0; i < ids.length; i++) {
-        await tx.topic.update({
-          where: { id: ids[i] },
-          data: { orderIndex: -(i + 1) },
-        });
-      }
-      for (let i = 0; i < ids.length; i++) {
-        await tx.topic.update({
-          where: { id: ids[i] },
-          data: { orderIndex: i + 1 },
-        });
-      }
-    });
+    const negative = Prisma.join(
+      ids.map((id, i) => Prisma.sql`WHEN ${id}::uuid THEN ${-(i + 1)}`),
+    );
+    const positive = Prisma.join(ids.map((id, i) => Prisma.sql`WHEN ${id}::uuid THEN ${i + 1}`));
+
+    await this.prisma.$transaction([
+      this.prisma.$executeRaw`
+        UPDATE topics
+        SET order_index = CASE id ${negative} END
+        WHERE chapter_id = ${chapterId}::uuid
+      `,
+      this.prisma.$executeRaw`
+        UPDATE topics
+        SET order_index = CASE id ${positive} END
+        WHERE chapter_id = ${chapterId}::uuid
+      `,
+    ]);
   }
 }

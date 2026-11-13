@@ -1,0 +1,1678 @@
+[
+  {
+    "label": "health.check",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 2651
+  },
+  {
+    "label": "auth.missing-token",
+    "method": "GET",
+    "path": "/subjects",
+    "status": 401,
+    "durationMs": 7,
+    "errorCode": "MISSING_AUTH_TOKEN"
+  },
+  {
+    "label": "auth.bad-token",
+    "method": "GET",
+    "path": "/subjects",
+    "status": 401,
+    "durationMs": 6,
+    "errorCode": "INVALID_TOKEN"
+  },
+  {
+    "label": "academic-years.list",
+    "method": "GET",
+    "path": "/academic-years",
+    "status": 404,
+    "durationMs": 7,
+    "errorCode": "RESOURCE_NOT_FOUND"
+  },
+  {
+    "label": "academic-years.create",
+    "method": "POST",
+    "path": "/academic-years",
+    "status": 404,
+    "durationMs": 66,
+    "errorCode": "RESOURCE_NOT_FOUND"
+  },
+  {
+    "label": "semesters.list",
+    "method": "GET",
+    "path": "/semesters",
+    "status": 404,
+    "durationMs": 6,
+    "errorCode": "RESOURCE_NOT_FOUND"
+  },
+  {
+    "label": "subjects.semester-filter",
+    "method": "GET",
+    "path": "/subjects?semesterId=00000000-0000-4000-8000-000000000000",
+    "status": 200,
+    "durationMs": 5120
+  },
+  {
+    "label": "subject.create.empty-name",
+    "method": "POST",
+    "path": "/subjects",
+    "status": 400,
+    "durationMs": 2238,
+    "errorCode": "VALIDATION_ERROR"
+  },
+  {
+    "label": "subject.create.long-name",
+    "method": "POST",
+    "path": "/subjects",
+    "status": 400,
+    "durationMs": 4374,
+    "errorCode": "VALIDATION_ERROR"
+  },
+  {
+    "label": "subject.create.weekly-too-low",
+    "method": "POST",
+    "path": "/subjects",
+    "status": 400,
+    "durationMs": 2421,
+    "errorCode": "VALIDATION_ERROR"
+  },
+  {
+    "label": "subject.create.weekly-too-high",
+    "method": "POST",
+    "path": "/subjects",
+    "status": 400,
+    "durationMs": 3753,
+    "errorCode": "VALIDATION_ERROR"
+  },
+  {
+    "label": "subject.create.icon-too-long",
+    "method": "POST",
+    "path": "/subjects",
+    "status": 400,
+    "durationMs": 2588,
+    "errorCode": "VALIDATION_ERROR"
+  },
+  {
+    "label": "subject.create.reject-academic-year",
+    "method": "POST",
+    "path": "/subjects",
+    "status": 400,
+    "durationMs": 3573,
+    "errorCode": "VALIDATION_ERROR"
+  },
+  {
+    "label": "subject.create.reject-class",
+    "method": "POST",
+    "path": "/subjects",
+    "status": 400,
+    "durationMs": 2235,
+    "errorCode": "VALIDATION_ERROR"
+  },
+  {
+    "label": "subject.create.reject-archived",
+    "method": "POST",
+    "path": "/subjects",
+    "status": 400,
+    "durationMs": 2962,
+    "errorCode": "VALIDATION_ERROR"
+  },
+  {
+    "label": "subject.create.defaults",
+    "method": "POST",
+    "path": "/subjects",
+    "status": 201,
+    "durationMs": 7726
+  },
+  {
+    "label": "subject.get.after-create",
+    "method": "GET",
+    "path": "/subjects/721d9c39-c8b8-48ed-92e7-218d93401b53",
+    "status": 200,
+    "durationMs": 6872
+  },
+  {
+    "label": "subject.create.duplicate-same-case",
+    "method": "POST",
+    "path": "/subjects",
+    "status": 409,
+    "durationMs": 5479,
+    "errorCode": "SUBJECT_ALREADY_EXISTS"
+  },
+  {
+    "label": "subject.create.duplicate-different-case",
+    "method": "POST",
+    "path": "/subjects",
+    "status": 409,
+    "durationMs": 5598,
+    "errorCode": "SUBJECT_ALREADY_EXISTS"
+  },
+  {
+    "label": "subject.create.duplicate-trimmed",
+    "method": "POST",
+    "path": "/subjects",
+    "status": 409,
+    "durationMs": 7122,
+    "errorCode": "SUBJECT_ALREADY_EXISTS"
+  },
+  {
+    "label": "subject.create.custom",
+    "method": "POST",
+    "path": "/subjects",
+    "status": 201,
+    "durationMs": 6161
+  },
+  {
+    "label": "subjects.list.default",
+    "method": "GET",
+    "path": "/subjects",
+    "status": 200,
+    "durationMs": 5519
+  },
+  {
+    "label": "subjects.list.archived-false",
+    "method": "GET",
+    "path": "/subjects?archived=false",
+    "status": 200,
+    "durationMs": 7118
+  },
+  {
+    "label": "subjects.list.archived-true-empty",
+    "method": "GET",
+    "path": "/subjects?archived=true",
+    "status": 200,
+    "durationMs": 6626
+  },
+  {
+    "label": "subjects.list.archived-all",
+    "method": "GET",
+    "path": "/subjects?archived=all",
+    "status": 200,
+    "durationMs": 5142
+  },
+  {
+    "label": "subjects.list.search-name",
+    "method": "GET",
+    "path": "/subjects?search=database",
+    "status": "NETWORK_ERROR"
+  },
+  {
+    "label": "subjects.list.search-code",
+    "method": "GET",
+    "path": "/subjects?search=cs-30",
+    "status": 200,
+    "durationMs": 9900
+  },
+  {
+    "label": "subjects.list.search-no-match",
+    "method": "GET",
+    "path": "/subjects?search=zzz-nope",
+    "status": 200,
+    "durationMs": 5639
+  },
+  {
+    "label": "subjects.list.unknown-params-ignored",
+    "method": "GET",
+    "path": "/subjects?semesterId=abc&page=2&limit=5",
+    "status": 200,
+    "durationMs": 5597
+  },
+  {
+    "label": "subject.update.fields",
+    "method": "PATCH",
+    "path": "/subjects/721d9c39-c8b8-48ed-92e7-218d93401b53",
+    "status": 200,
+    "durationMs": 7927
+  },
+  {
+    "label": "subject.update.empty-name",
+    "method": "PATCH",
+    "path": "/subjects/721d9c39-c8b8-48ed-92e7-218d93401b53",
+    "status": 400,
+    "durationMs": 3313,
+    "errorCode": "VALIDATION_ERROR"
+  },
+  {
+    "label": "subject.update.unknown-field",
+    "method": "PATCH",
+    "path": "/subjects/721d9c39-c8b8-48ed-92e7-218d93401b53",
+    "status": 400,
+    "durationMs": 2377,
+    "errorCode": "VALIDATION_ERROR"
+  },
+  {
+    "label": "subject.update.rename-to-existing",
+    "method": "PATCH",
+    "path": "/subjects/721d9c39-c8b8-48ed-92e7-218d93401b53",
+    "status": 200,
+    "durationMs": 10303
+  },
+  {
+    "label": "subject.archive",
+    "method": "PATCH",
+    "path": "/subjects/721d9c39-c8b8-48ed-92e7-218d93401b53",
+    "status": 200,
+    "durationMs": 6999
+  },
+  {
+    "label": "subjects.list.after-archive-default",
+    "method": "GET",
+    "path": "/subjects",
+    "status": 200,
+    "durationMs": 4984
+  },
+  {
+    "label": "subjects.list.after-archive-true",
+    "method": "GET",
+    "path": "/subjects?archived=true",
+    "status": 200,
+    "durationMs": 7256
+  },
+  {
+    "label": "subjects.list.after-archive-all",
+    "method": "GET",
+    "path": "/subjects?archived=all",
+    "status": 200,
+    "durationMs": 5599
+  },
+  {
+    "label": "subject.get.archived-by-id",
+    "method": "GET",
+    "path": "/subjects/721d9c39-c8b8-48ed-92e7-218d93401b53",
+    "status": 200,
+    "durationMs": 5123
+  },
+  {
+    "label": "subject.restore",
+    "method": "PATCH",
+    "path": "/subjects/721d9c39-c8b8-48ed-92e7-218d93401b53",
+    "status": 200,
+    "durationMs": 6677
+  },
+  {
+    "label": "subject.get.malformed-id",
+    "method": "GET",
+    "path": "/subjects/not-a-uuid",
+    "status": 400,
+    "durationMs": 2323,
+    "errorCode": "VALIDATION_ERROR"
+  },
+  {
+    "label": "subject.get.unknown-id",
+    "method": "GET",
+    "path": "/subjects/00000000-0000-4000-8000-000000000000",
+    "status": 404,
+    "durationMs": 4119,
+    "errorCode": "SUBJECT_NOT_FOUND"
+  },
+  {
+    "label": "subject.get.other-users-subject",
+    "method": "GET",
+    "path": "/subjects/721d9c39-c8b8-48ed-92e7-218d93401b53",
+    "status": 403,
+    "durationMs": 5236,
+    "errorCode": "SUBJECT_OWNERSHIP_VIOLATION"
+  },
+  {
+    "label": "subject.patch.other-users-subject",
+    "method": "PATCH",
+    "path": "/subjects/721d9c39-c8b8-48ed-92e7-218d93401b53",
+    "status": 403,
+    "durationMs": 5080,
+    "errorCode": "SUBJECT_OWNERSHIP_VIOLATION"
+  },
+  {
+    "label": "subject.delete.other-users-subject",
+    "method": "DELETE",
+    "path": "/subjects/721d9c39-c8b8-48ed-92e7-218d93401b53",
+    "status": 403,
+    "durationMs": 5567,
+    "errorCode": "SUBJECT_OWNERSHIP_VIOLATION"
+  },
+  {
+    "label": "subject.put-not-allowed",
+    "method": "PUT",
+    "path": "/subjects/721d9c39-c8b8-48ed-92e7-218d93401b53",
+    "status": 404,
+    "durationMs": 3,
+    "errorCode": "RESOURCE_NOT_FOUND"
+  },
+  {
+    "label": "subjects.put-collection-not-allowed",
+    "method": "PUT",
+    "path": "/subjects",
+    "status": 404,
+    "durationMs": 2,
+    "errorCode": "RESOURCE_NOT_FOUND"
+  },
+  {
+    "label": "chapter.create.invalid-subject-uuid",
+    "method": "POST",
+    "path": "/chapters",
+    "status": 400,
+    "durationMs": 2192,
+    "errorCode": "VALIDATION_ERROR"
+  },
+  {
+    "label": "chapter.create.unknown-subject",
+    "method": "POST",
+    "path": "/chapters",
+    "status": 404,
+    "durationMs": 3757,
+    "errorCode": "SUBJECT_NOT_FOUND"
+  },
+  {
+    "label": "chapter.create.other-users-subject",
+    "method": "POST",
+    "path": "/chapters",
+    "status": 403,
+    "durationMs": 5161,
+    "errorCode": "SUBJECT_OWNERSHIP_VIOLATION"
+  },
+  {
+    "label": "chapter.create.missing-title",
+    "method": "POST",
+    "path": "/chapters",
+    "status": 400,
+    "durationMs": 2239,
+    "errorCode": "VALIDATION_ERROR"
+  },
+  {
+    "label": "chapter.create.long-title",
+    "method": "POST",
+    "path": "/chapters",
+    "status": 400,
+    "durationMs": 2600,
+    "errorCode": "VALIDATION_ERROR"
+  },
+  {
+    "label": "chapter.create.too-short-estimate",
+    "method": "POST",
+    "path": "/chapters",
+    "status": 400,
+    "durationMs": 2243,
+    "errorCode": "VALIDATION_ERROR"
+  },
+  {
+    "label": "chapter.create.zero-order",
+    "method": "POST",
+    "path": "/chapters",
+    "status": 400,
+    "durationMs": 2196,
+    "errorCode": "VALIDATION_ERROR"
+  },
+  {
+    "label": "chapter.create.A-first",
+    "method": "POST",
+    "path": "/chapters",
+    "status": 201,
+    "durationMs": 22179
+  },
+  {
+    "label": "chapter.create.B-insert-at-1",
+    "method": "POST",
+    "path": "/chapters",
+    "status": 201,
+    "durationMs": 66819
+  },
+  {
+    "label": "chapter.create.C-insert-at-2",
+    "method": "POST",
+    "path": "/chapters",
+    "status": 201,
+    "durationMs": 86130
+  },
+  {
+    "label": "subject.get.tree-after-chapters",
+    "method": "GET",
+    "path": "/subjects/721d9c39-c8b8-48ed-92e7-218d93401b53",
+    "status": 200,
+    "durationMs": 22547
+  },
+  {
+    "label": "chapter.update.fields",
+    "method": "PATCH",
+    "path": "/chapters/3d699d7f-3741-45ac-984b-607a589b1305",
+    "status": 200,
+    "durationMs": 70172
+  },
+  {
+    "label": "chapter.update.unknown-field",
+    "method": "PATCH",
+    "path": "/chapters/3d699d7f-3741-45ac-984b-607a589b1305",
+    "status": 400,
+    "durationMs": 9147,
+    "errorCode": "VALIDATION_ERROR"
+  },
+  {
+    "label": "chapter.update.other-user",
+    "method": "PATCH",
+    "path": "/chapters/3d699d7f-3741-45ac-984b-607a589b1305",
+    "status": 403,
+    "durationMs": 21878,
+    "errorCode": "CHAPTER_OWNERSHIP_VIOLATION"
+  },
+  {
+    "label": "chapter.patch.unknown-id",
+    "method": "PATCH",
+    "path": "/chapters/00000000-0000-4000-8000-000000000000",
+    "status": 404,
+    "durationMs": 16446,
+    "errorCode": "CHAPTER_NOT_FOUND"
+  },
+  {
+    "label": "chapter.patch.malformed-id",
+    "method": "PATCH",
+    "path": "/chapters/abc",
+    "status": 400,
+    "durationMs": 11517,
+    "errorCode": "VALIDATION_ERROR"
+  },
+  {
+    "label": "chapter.reorder.C-to-1",
+    "method": "PATCH",
+    "path": "/chapters/66a6756c-4304-4465-bd29-8ae20777cd41",
+    "status": 200,
+    "durationMs": 85320
+  },
+  {
+    "label": "subject.get.tree-after-reorder",
+    "method": "GET",
+    "path": "/subjects/721d9c39-c8b8-48ed-92e7-218d93401b53",
+    "status": 200,
+    "durationMs": 22639
+  },
+  {
+    "label": "chapter.reorder.huge-index-clamped",
+    "method": "PATCH",
+    "path": "/chapters/becc4205-304f-4710-8dc0-54a8c9e1fe3c",
+    "status": 200,
+    "durationMs": 84681
+  },
+  {
+    "label": "subject.get.tree-after-clamp",
+    "method": "GET",
+    "path": "/subjects/721d9c39-c8b8-48ed-92e7-218d93401b53",
+    "status": 200,
+    "durationMs": 12749
+  },
+  {
+    "label": "chapter.reorder.foundations-to-1",
+    "method": "PATCH",
+    "path": "/chapters/becc4205-304f-4710-8dc0-54a8c9e1fe3c",
+    "status": 200,
+    "durationMs": 26983
+  },
+  {
+    "label": "chapter.reorder.memory-to-2",
+    "method": "PATCH",
+    "path": "/chapters/3d699d7f-3741-45ac-984b-607a589b1305",
+    "status": 200,
+    "durationMs": 24896
+  },
+  {
+    "label": "chapter.reorder.file-to-3",
+    "method": "PATCH",
+    "path": "/chapters/66a6756c-4304-4465-bd29-8ae20777cd41",
+    "status": 200,
+    "durationMs": 29784
+  },
+  {
+    "label": "topic.create.invalid-chapter-uuid",
+    "method": "POST",
+    "path": "/chapters/topics",
+    "status": 400,
+    "durationMs": 3076,
+    "errorCode": "VALIDATION_ERROR"
+  },
+  {
+    "label": "topic.create.unknown-chapter",
+    "method": "POST",
+    "path": "/chapters/topics",
+    "status": 404,
+    "durationMs": 5649,
+    "errorCode": "CHAPTER_NOT_FOUND"
+  },
+  {
+    "label": "topic.create.other-users-chapter",
+    "method": "POST",
+    "path": "/chapters/topics",
+    "status": 403,
+    "durationMs": 9314,
+    "errorCode": "CHAPTER_OWNERSHIP_VIOLATION"
+  },
+  {
+    "label": "topic.create.reject-is-completed",
+    "method": "POST",
+    "path": "/chapters/topics",
+    "status": 400,
+    "durationMs": 3053,
+    "errorCode": "VALIDATION_ERROR"
+  },
+  {
+    "label": "topic.create.bad-difficulty",
+    "method": "POST",
+    "path": "/chapters/topics",
+    "status": 400,
+    "durationMs": 5954,
+    "errorCode": "VALIDATION_ERROR"
+  },
+  {
+    "label": "topic.create.t1-position-1",
+    "method": "POST",
+    "path": "/chapters/topics",
+    "status": 201,
+    "durationMs": 29432
+  },
+  {
+    "label": "topic.create.t2-insert-at-1",
+    "method": "POST",
+    "path": "/chapters/topics",
+    "status": 201,
+    "durationMs": 26319
+  },
+  {
+    "label": "topic.create.t3-insert-at-2",
+    "method": "POST",
+    "path": "/chapters/topics",
+    "status": 201,
+    "durationMs": 23878
+  },
+  {
+    "label": "subject.get.tree-after-topics",
+    "method": "GET",
+    "path": "/subjects/721d9c39-c8b8-48ed-92e7-218d93401b53",
+    "status": 200,
+    "durationMs": 8200
+  },
+  {
+    "label": "topic.update.fields",
+    "method": "PATCH",
+    "path": "/topics/8d3ae2d8-41cd-4c2d-915a-c018bb5e028f",
+    "status": 200,
+    "durationMs": 20756
+  },
+  {
+    "label": "topic.update.unknown-field",
+    "method": "PATCH",
+    "path": "/topics/8d3ae2d8-41cd-4c2d-915a-c018bb5e028f",
+    "status": 400,
+    "durationMs": 3528,
+    "errorCode": "VALIDATION_ERROR"
+  },
+  {
+    "label": "topic.update.other-user",
+    "method": "PATCH",
+    "path": "/topics/8d3ae2d8-41cd-4c2d-915a-c018bb5e028f",
+    "status": 403,
+    "durationMs": 7159,
+    "errorCode": "TOPIC_OWNERSHIP_VIOLATION"
+  },
+  {
+    "label": "topic.patch.unknown-id",
+    "method": "PATCH",
+    "path": "/topics/00000000-0000-4000-8000-000000000000",
+    "status": 404,
+    "durationMs": 5354,
+    "errorCode": "TOPIC_NOT_FOUND"
+  },
+  {
+    "label": "topic.patch.malformed-id",
+    "method": "PATCH",
+    "path": "/topics/abc",
+    "status": 400,
+    "durationMs": 3600,
+    "errorCode": "VALIDATION_ERROR"
+  },
+  {
+    "label": "topic.reorder.t1-to-1",
+    "method": "PATCH",
+    "path": "/topics/8d3ae2d8-41cd-4c2d-915a-c018bb5e028f",
+    "status": 200,
+    "durationMs": 18660
+  },
+  {
+    "label": "topic.reorder.t2-to-2",
+    "method": "PATCH",
+    "path": "/topics/482853d7-e50f-4950-9b70-e99221913671",
+    "status": 200,
+    "durationMs": 18696
+  },
+  {
+    "label": "topic.reorder.t3-to-3",
+    "method": "PATCH",
+    "path": "/topics/ee39adb1-487a-4771-aa26-ba5465202701",
+    "status": 200,
+    "durationMs": 18401
+  },
+  {
+    "label": "topic.reorder.t3-to-1",
+    "method": "PATCH",
+    "path": "/topics/ee39adb1-487a-4771-aa26-ba5465202701",
+    "status": 200,
+    "durationMs": 18641
+  },
+  {
+    "label": "subject.get.tree-after-topic-reorder",
+    "method": "GET",
+    "path": "/subjects/721d9c39-c8b8-48ed-92e7-218d93401b53",
+    "status": 200,
+    "durationMs": 7967
+  },
+  {
+    "label": "topic.reorder.t3-back-to-3",
+    "method": "PATCH",
+    "path": "/topics/ee39adb1-487a-4771-aa26-ba5465202701",
+    "status": 200,
+    "durationMs": 15550
+  },
+  {
+    "label": "topic.complete.t1",
+    "method": "POST",
+    "path": "/topics/8d3ae2d8-41cd-4c2d-915a-c018bb5e028f/complete",
+    "status": 201,
+    "durationMs": 10840
+  },
+  {
+    "label": "topic.complete.t1-again-idempotent",
+    "method": "POST",
+    "path": "/topics/8d3ae2d8-41cd-4c2d-915a-c018bb5e028f/complete",
+    "status": 201,
+    "durationMs": 10999
+  },
+  {
+    "label": "subjectProgress.after-topic-complete",
+    "method": "GET",
+    "path": "/analytics/subject-progress",
+    "status": 200,
+    "durationMs": 4764
+  },
+  {
+    "label": "subject.get.progress-after-topic-complete",
+    "method": "GET",
+    "path": "/subjects/721d9c39-c8b8-48ed-92e7-218d93401b53",
+    "status": 200,
+    "durationMs": 6283
+  },
+  {
+    "label": "topic.uncomplete.t1",
+    "method": "POST",
+    "path": "/topics/8d3ae2d8-41cd-4c2d-915a-c018bb5e028f/uncomplete",
+    "status": 201,
+    "durationMs": 10633
+  },
+  {
+    "label": "subjectProgress.after-topic-uncomplete",
+    "method": "GET",
+    "path": "/analytics/subject-progress",
+    "status": 200,
+    "durationMs": 4486
+  },
+  {
+    "label": "topic.complete.t1-second",
+    "method": "POST",
+    "path": "/topics/8d3ae2d8-41cd-4c2d-915a-c018bb5e028f/complete",
+    "status": 201,
+    "durationMs": 11370
+  },
+  {
+    "label": "topic.complete.t2",
+    "method": "POST",
+    "path": "/topics/482853d7-e50f-4950-9b70-e99221913671/complete",
+    "status": 201,
+    "durationMs": 11662
+  },
+  {
+    "label": "subjectProgress.two-topics",
+    "method": "GET",
+    "path": "/analytics/subject-progress",
+    "status": 200,
+    "durationMs": 5078
+  },
+  {
+    "label": "chapter.complete.A",
+    "method": "POST",
+    "path": "/chapters/becc4205-304f-4710-8dc0-54a8c9e1fe3c/complete",
+    "status": 201,
+    "durationMs": 10528
+  },
+  {
+    "label": "subjectProgress.after-chapter-A",
+    "method": "GET",
+    "path": "/analytics/subject-progress",
+    "status": 200,
+    "durationMs": 4472
+  },
+  {
+    "label": "chapter.complete.B",
+    "method": "POST",
+    "path": "/chapters/3d699d7f-3741-45ac-984b-607a589b1305/complete",
+    "status": 201,
+    "durationMs": 10241
+  },
+  {
+    "label": "subjectProgress.after-chapter-B",
+    "method": "GET",
+    "path": "/analytics/subject-progress",
+    "status": 200,
+    "durationMs": 5207
+  },
+  {
+    "label": "chapter.uncomplete.A",
+    "method": "POST",
+    "path": "/chapters/becc4205-304f-4710-8dc0-54a8c9e1fe3c/uncomplete",
+    "status": 201,
+    "durationMs": 12188
+  },
+  {
+    "label": "subjectProgress.after-chapter-A-uncomplete",
+    "method": "GET",
+    "path": "/analytics/subject-progress",
+    "status": 200,
+    "durationMs": 6091
+  },
+  {
+    "label": "chapter.complete.A-again",
+    "method": "POST",
+    "path": "/chapters/becc4205-304f-4710-8dc0-54a8c9e1fe3c/complete",
+    "status": 201,
+    "durationMs": 14799
+  },
+  {
+    "label": "chapter.complete.C",
+    "method": "POST",
+    "path": "/chapters/66a6756c-4304-4465-bd29-8ae20777cd41/complete",
+    "status": 201,
+    "durationMs": 9999
+  },
+  {
+    "label": "subjectProgress.all-chapters-complete",
+    "method": "GET",
+    "path": "/analytics/subject-progress",
+    "status": 200,
+    "durationMs": 4889
+  },
+  {
+    "label": "chapter.complete.other-user",
+    "method": "POST",
+    "path": "/chapters/becc4205-304f-4710-8dc0-54a8c9e1fe3c/complete",
+    "status": 403,
+    "durationMs": 4444,
+    "errorCode": "CHAPTER_OWNERSHIP_VIOLATION"
+  },
+  {
+    "label": "chapter.complete.unknown-id",
+    "method": "POST",
+    "path": "/chapters/00000000-0000-4000-8000-000000000000/complete",
+    "status": 404,
+    "durationMs": 3882,
+    "errorCode": "CHAPTER_NOT_FOUND"
+  },
+  {
+    "label": "chapter.complete.malformed-id",
+    "method": "POST",
+    "path": "/chapters/abc/complete",
+    "status": 400,
+    "durationMs": 2506,
+    "errorCode": "VALIDATION_ERROR"
+  },
+  {
+    "label": "topic.complete.other-user",
+    "method": "POST",
+    "path": "/topics/8d3ae2d8-41cd-4c2d-915a-c018bb5e028f/complete",
+    "status": 403,
+    "durationMs": 5449,
+    "errorCode": "TOPIC_OWNERSHIP_VIOLATION"
+  },
+  {
+    "label": "topic.complete.unknown-id",
+    "method": "POST",
+    "path": "/topics/00000000-0000-4000-8000-000000000000/complete",
+    "status": 404,
+    "durationMs": 3912,
+    "errorCode": "TOPIC_NOT_FOUND"
+  },
+  {
+    "label": "topic.delete.other-user",
+    "method": "DELETE",
+    "path": "/topics/ee39adb1-487a-4771-aa26-ba5465202701",
+    "status": 403,
+    "durationMs": 5126,
+    "errorCode": "TOPIC_OWNERSHIP_VIOLATION"
+  },
+  {
+    "label": "topic.delete.t3",
+    "method": "DELETE",
+    "path": "/topics/ee39adb1-487a-4771-aa26-ba5465202701",
+    "status": 200,
+    "durationMs": 10673
+  },
+  {
+    "label": "topic.delete.t3-again",
+    "method": "DELETE",
+    "path": "/topics/ee39adb1-487a-4771-aa26-ba5465202701",
+    "status": 404,
+    "durationMs": 3761,
+    "errorCode": "TOPIC_NOT_FOUND"
+  },
+  {
+    "label": "subjectProgress.after-topic-delete",
+    "method": "GET",
+    "path": "/analytics/subject-progress",
+    "status": 200,
+    "durationMs": 4485
+  },
+  {
+    "label": "chapter.delete.other-user",
+    "method": "DELETE",
+    "path": "/chapters/66a6756c-4304-4465-bd29-8ae20777cd41",
+    "status": 403,
+    "durationMs": 4837,
+    "errorCode": "CHAPTER_OWNERSHIP_VIOLATION"
+  },
+  {
+    "label": "chapter.delete.C-with-topics",
+    "method": "DELETE",
+    "path": "/chapters/66a6756c-4304-4465-bd29-8ae20777cd41",
+    "status": 200,
+    "durationMs": 10597
+  },
+  {
+    "label": "chapter.delete.C-again",
+    "method": "DELETE",
+    "path": "/chapters/66a6756c-4304-4465-bd29-8ae20777cd41",
+    "status": 404,
+    "durationMs": 3880,
+    "errorCode": "CHAPTER_NOT_FOUND"
+  },
+  {
+    "label": "subjectProgress.after-chapter-delete",
+    "method": "GET",
+    "path": "/analytics/subject-progress",
+    "status": 200,
+    "durationMs": 4476
+  },
+  {
+    "label": "subject.get.after-chapter-delete",
+    "method": "GET",
+    "path": "/subjects/721d9c39-c8b8-48ed-92e7-218d93401b53",
+    "status": 200,
+    "durationMs": 5923
+  },
+  {
+    "label": "ratelimit.health.101",
+    "method": "GET",
+    "path": "/health",
+    "status": 429,
+    "durationMs": 78,
+    "errorCode": "RATE_LIMIT_EXCEEDED"
+  },
+  {
+    "label": "ratelimit.health.102",
+    "method": "GET",
+    "path": "/health",
+    "status": 429,
+    "durationMs": 79,
+    "errorCode": "RATE_LIMIT_EXCEEDED"
+  },
+  {
+    "label": "ratelimit.health.103",
+    "method": "GET",
+    "path": "/health",
+    "status": 429,
+    "durationMs": 79,
+    "errorCode": "RATE_LIMIT_EXCEEDED"
+  },
+  {
+    "label": "ratelimit.health.104",
+    "method": "GET",
+    "path": "/health",
+    "status": 429,
+    "durationMs": 79,
+    "errorCode": "RATE_LIMIT_EXCEEDED"
+  },
+  {
+    "label": "ratelimit.health.105",
+    "method": "GET",
+    "path": "/health",
+    "status": 429,
+    "durationMs": 78,
+    "errorCode": "RATE_LIMIT_EXCEEDED"
+  },
+  {
+    "label": "ratelimit.health.2",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 1854
+  },
+  {
+    "label": "ratelimit.health.1",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 1886
+  },
+  {
+    "label": "ratelimit.health.9",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 3396
+  },
+  {
+    "label": "ratelimit.health.10",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 3476
+  },
+  {
+    "label": "ratelimit.health.11",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 4955
+  },
+  {
+    "label": "ratelimit.health.12",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 5039
+  },
+  {
+    "label": "ratelimit.health.6",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 5358
+  },
+  {
+    "label": "ratelimit.health.7",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 5358
+  },
+  {
+    "label": "ratelimit.health.3",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 5361
+  },
+  {
+    "label": "ratelimit.health.4",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 5361
+  },
+  {
+    "label": "ratelimit.health.5",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 5437
+  },
+  {
+    "label": "ratelimit.health.8",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 5437
+  },
+  {
+    "label": "ratelimit.health.13",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 6526
+  },
+  {
+    "label": "ratelimit.health.14",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 6620
+  },
+  {
+    "label": "ratelimit.health.15",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 7356
+  },
+  {
+    "label": "ratelimit.health.17",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 7393
+  },
+  {
+    "label": "ratelimit.health.16",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 7434
+  },
+  {
+    "label": "ratelimit.health.18",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 7522
+  },
+  {
+    "label": "ratelimit.health.19",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 7561
+  },
+  {
+    "label": "ratelimit.health.20",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 7593
+  },
+  {
+    "label": "ratelimit.health.21",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 8057
+  },
+  {
+    "label": "ratelimit.health.22",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 8175
+  },
+  {
+    "label": "ratelimit.health.23",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 9375
+  },
+  {
+    "label": "ratelimit.health.24",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 9514
+  },
+  {
+    "label": "ratelimit.health.27",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 9521
+  },
+  {
+    "label": "ratelimit.health.25",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 9641
+  },
+  {
+    "label": "ratelimit.health.29",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 9643
+  },
+  {
+    "label": "ratelimit.health.28",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 9670
+  },
+  {
+    "label": "ratelimit.health.31",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 9749
+  },
+  {
+    "label": "ratelimit.health.26",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 9773
+  },
+  {
+    "label": "ratelimit.health.35",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 11189
+  },
+  {
+    "label": "ratelimit.health.37",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 11308
+  },
+  {
+    "label": "ratelimit.health.30",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 11472
+  },
+  {
+    "label": "ratelimit.health.33",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 11646
+  },
+  {
+    "label": "ratelimit.health.32",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 11647
+  },
+  {
+    "label": "ratelimit.health.34",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 11759
+  },
+  {
+    "label": "ratelimit.health.36",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 11829
+  },
+  {
+    "label": "ratelimit.health.38",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 11950
+  },
+  {
+    "label": "ratelimit.health.39",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 12758
+  },
+  {
+    "label": "ratelimit.health.40",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 12917
+  },
+  {
+    "label": "ratelimit.health.42",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 13571
+  },
+  {
+    "label": "ratelimit.health.43",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 13709
+  },
+  {
+    "label": "ratelimit.health.41",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 13750
+  },
+  {
+    "label": "ratelimit.health.44",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 13831
+  },
+  {
+    "label": "ratelimit.health.45",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 13996
+  },
+  {
+    "label": "ratelimit.health.46",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 14147
+  },
+  {
+    "label": "ratelimit.health.47",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 14306
+  },
+  {
+    "label": "ratelimit.health.48",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 14465
+  },
+  {
+    "label": "ratelimit.health.49",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 16026
+  },
+  {
+    "label": "ratelimit.health.51",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 16030
+  },
+  {
+    "label": "ratelimit.health.50",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 16031
+  },
+  {
+    "label": "ratelimit.health.52",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 16030
+  },
+  {
+    "label": "ratelimit.health.55",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 16141
+  },
+  {
+    "label": "ratelimit.health.56",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 16307
+  },
+  {
+    "label": "ratelimit.health.53",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 16471
+  },
+  {
+    "label": "ratelimit.health.54",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 16475
+  },
+  {
+    "label": "ratelimit.health.57",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 18226
+  },
+  {
+    "label": "ratelimit.health.59",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 18228
+  },
+  {
+    "label": "ratelimit.health.60",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 18230
+  },
+  {
+    "label": "ratelimit.health.58",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 18231
+  },
+  {
+    "label": "ratelimit.health.61",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 18346
+  },
+  {
+    "label": "ratelimit.health.62",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 18346
+  },
+  {
+    "label": "ratelimit.health.64",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 18665
+  },
+  {
+    "label": "ratelimit.health.63",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 18668
+  },
+  {
+    "label": "ratelimit.health.69",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 19942
+  },
+  {
+    "label": "ratelimit.health.70",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 19943
+  },
+  {
+    "label": "ratelimit.health.77",
+    "method": "GET",
+    "path": "/health",
+    "status": 503,
+    "durationMs": 20080
+  },
+  {
+    "label": "ratelimit.health.79",
+    "method": "GET",
+    "path": "/health",
+    "status": 503,
+    "durationMs": 20083
+  },
+  {
+    "label": "ratelimit.health.75",
+    "method": "GET",
+    "path": "/health",
+    "status": 503,
+    "durationMs": 20087
+  },
+  {
+    "label": "ratelimit.health.76",
+    "method": "GET",
+    "path": "/health",
+    "status": 503,
+    "durationMs": 20091
+  },
+  {
+    "label": "ratelimit.health.81",
+    "method": "GET",
+    "path": "/health",
+    "status": 503,
+    "durationMs": 20093
+  },
+  {
+    "label": "ratelimit.health.83",
+    "method": "GET",
+    "path": "/health",
+    "status": 503,
+    "durationMs": 20095
+  },
+  {
+    "label": "ratelimit.health.84",
+    "method": "GET",
+    "path": "/health",
+    "status": 503,
+    "durationMs": 20098
+  },
+  {
+    "label": "ratelimit.health.82",
+    "method": "GET",
+    "path": "/health",
+    "status": 503,
+    "durationMs": 20103
+  },
+  {
+    "label": "ratelimit.health.78",
+    "method": "GET",
+    "path": "/health",
+    "status": 503,
+    "durationMs": 20106
+  },
+  {
+    "label": "ratelimit.health.80",
+    "method": "GET",
+    "path": "/health",
+    "status": 503,
+    "durationMs": 20108
+  },
+  {
+    "label": "ratelimit.health.85",
+    "method": "GET",
+    "path": "/health",
+    "status": 503,
+    "durationMs": 20111
+  },
+  {
+    "label": "ratelimit.health.90",
+    "method": "GET",
+    "path": "/health",
+    "status": 503,
+    "durationMs": 20112
+  },
+  {
+    "label": "ratelimit.health.91",
+    "method": "GET",
+    "path": "/health",
+    "status": 503,
+    "durationMs": 20115
+  },
+  {
+    "label": "ratelimit.health.93",
+    "method": "GET",
+    "path": "/health",
+    "status": 503,
+    "durationMs": 20117
+  },
+  {
+    "label": "ratelimit.health.92",
+    "method": "GET",
+    "path": "/health",
+    "status": 503,
+    "durationMs": 20121
+  },
+  {
+    "label": "ratelimit.health.86",
+    "method": "GET",
+    "path": "/health",
+    "status": 503,
+    "durationMs": 20124
+  },
+  {
+    "label": "ratelimit.health.96",
+    "method": "GET",
+    "path": "/health",
+    "status": 503,
+    "durationMs": 20125
+  },
+  {
+    "label": "ratelimit.health.97",
+    "method": "GET",
+    "path": "/health",
+    "status": 503,
+    "durationMs": 20126
+  },
+  {
+    "label": "ratelimit.health.87",
+    "method": "GET",
+    "path": "/health",
+    "status": 503,
+    "durationMs": 20130
+  },
+  {
+    "label": "ratelimit.health.94",
+    "method": "GET",
+    "path": "/health",
+    "status": 503,
+    "durationMs": 20129
+  },
+  {
+    "label": "ratelimit.health.99",
+    "method": "GET",
+    "path": "/health",
+    "status": 503,
+    "durationMs": 20131
+  },
+  {
+    "label": "ratelimit.health.100",
+    "method": "GET",
+    "path": "/health",
+    "status": 503,
+    "durationMs": 20132
+  },
+  {
+    "label": "ratelimit.health.98",
+    "method": "GET",
+    "path": "/health",
+    "status": 503,
+    "durationMs": 20135
+  },
+  {
+    "label": "ratelimit.health.95",
+    "method": "GET",
+    "path": "/health",
+    "status": 503,
+    "durationMs": 20136
+  },
+  {
+    "label": "ratelimit.health.88",
+    "method": "GET",
+    "path": "/health",
+    "status": 503,
+    "durationMs": 20139
+  },
+  {
+    "label": "ratelimit.health.89",
+    "method": "GET",
+    "path": "/health",
+    "status": 503,
+    "durationMs": 20141
+  },
+  {
+    "label": "ratelimit.health.65",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 20743
+  },
+  {
+    "label": "ratelimit.health.66",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 20747
+  },
+  {
+    "label": "ratelimit.health.68",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 20784
+  },
+  {
+    "label": "ratelimit.health.67",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 20785
+  },
+  {
+    "label": "ratelimit.health.72",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 21263
+  },
+  {
+    "label": "ratelimit.health.71",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 21265
+  },
+  {
+    "label": "ratelimit.health.74",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 21623
+  },
+  {
+    "label": "ratelimit.health.73",
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "durationMs": 21625
+  },
+  {
+    "label": "ratelimit.subjects-still-ok",
+    "method": "GET",
+    "path": "/subjects",
+    "status": 200,
+    "durationMs": 5795
+  },
+  {
+    "label": "subject.delete.s2",
+    "method": "DELETE",
+    "path": "/subjects/02c10394-d6b3-4018-a320-43a78e0bd061",
+    "status": 200,
+    "durationMs": 7103
+  },
+  {
+    "label": "subject.delete.s1-cascade",
+    "method": "DELETE",
+    "path": "/subjects/721d9c39-c8b8-48ed-92e7-218d93401b53",
+    "status": 200,
+    "durationMs": 7621
+  },
+  {
+    "label": "subject.get.after-delete",
+    "method": "GET",
+    "path": "/subjects/721d9c39-c8b8-48ed-92e7-218d93401b53",
+    "status": 404,
+    "durationMs": 3877,
+    "errorCode": "SUBJECT_NOT_FOUND"
+  },
+  {
+    "label": "subjects.list.after-delete",
+    "method": "GET",
+    "path": "/subjects",
+    "status": 200,
+    "durationMs": 4036
+  }
+]
